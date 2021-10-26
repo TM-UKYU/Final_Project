@@ -16,7 +16,7 @@ public class ChangeScene : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.N))
         {
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("TitleScene");
         }
     }
 }
