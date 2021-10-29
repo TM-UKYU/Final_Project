@@ -5,18 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class ChangeScene : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    // 遷移先のシーンの名前
+    public string nextSceneName;
 
-    // Update is called once per frame
-    void Update()
+    // シーン遷移
+    public void LoadNextScene()
     {
-        if(Input.GetKeyDown(KeyCode.N))
-        {
-            SceneManager.LoadScene("TitleScene");
-        }
+        SceneManager.LoadScene(nextSceneName);
     }
 }
