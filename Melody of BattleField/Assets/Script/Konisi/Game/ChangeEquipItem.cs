@@ -5,20 +5,23 @@ using UnityEngine.UI;
 
 public class ChangeEquipItem : MonoBehaviour
 {
-    public Image itemListCenter;
-    public Image itemListLeft;
-    public Image itemListRight;
+    public List<Image> itemList;
 
-    public Vector3 centerPos;
+    public int centerArrayNum;
 
     // Start is called before the first frame update
     void Start()
     {
-        // アイテムリスト非表示
-        itemListLeft.enabled = false;
-        itemListRight.enabled = false;
-        
-        centerPos = itemListCenter.transform.position;
+        // アイテムスライダーの真ん中以外非表示
+        for(int i = 0; i < itemList.Count; i++)
+        {
+            if(i != itemList.Count / 2)
+            {
+                itemList[i].gameObject.SetActive(false);
+            }
+        }
+
+        centerArrayNum = itemList.Count / 2;
     }
 
     // Update is called once per frame
@@ -27,10 +30,49 @@ public class ChangeEquipItem : MonoBehaviour
         // LCTRLが長押しされたら
         if (Input.GetKey(KeyCode.LeftControl))
         {
-            // アイテムリスト表示
-            itemListCenter.enabled = true;
-            itemListLeft.enabled = true;
-            itemListRight.enabled = true;
+            // アイテムリストの真ん中と左右以外表示
+            for (int i = 0; i < itemList.Count; i++)
+            {
+                if(centerArrayNum == 0)
+                {
+                    if (i == centerArrayNum ||
+                        i == centerArrayNum + 1 ||
+                        i == centerArrayNum - itemList.Count - 1)
+                    {
+                        itemList[i].gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        itemList[i].gameObject.SetActive(false);
+                    }
+                }
+                else if(centerArrayNum == itemList.Count)
+                {
+                    if (i == centerArrayNum ||
+                        i == centerArrayNum + itemList.Count - 1||
+                        i == centerArrayNum - 1)
+                    {
+                        itemList[i].gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        itemList[i].gameObject.SetActive(false);
+                    }
+                }
+                else
+                {
+                    if (i == centerArrayNum ||
+                        i == centerArrayNum + 1 ||
+                        i == centerArrayNum - 1)
+                    {
+                        itemList[i].gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        itemList[i].gameObject.SetActive(false);
+                    }
+                }
+            }
 
             // 位置変換用
             Vector3 itemListFakePos;
@@ -39,41 +81,55 @@ public class ChangeEquipItem : MonoBehaviour
             float mouseScrollWheel = Input.GetAxis("Mouse ScrollWheel");
             if (mouseScrollWheel > 0.0f)
             {
-                // 位置入れ替え(右へ)
-                itemListFakePos = itemListCenter.transform.position;
-                itemListCenter.transform.position = itemListRight.transform.position;
-                itemListRight.transform.position = itemListLeft.transform.position;
-                itemListLeft.transform.position = itemListFakePos;
+                if (centerArrayNum != 0)
+                {
+                    // 左端記憶
+                    itemListFakePos = itemList[0].transform.position;
+                    // 位置入れ替え(右へ)
+                    for (int i = 0; i < itemList.Count; i++)
+                    {
+                        if (i != (itemList.Count - 1))
+                        {
+                            itemList[i].transform.position = itemList[i + 1].transform.position;
+                        }
+                    }
+                    centerArrayNum--;
+
+                    // 記憶した左端を右端へ
+                    itemList[itemList.Count - 1].transform.position = itemListFakePos;
+                }
             }
             else if (mouseScrollWheel < 0.0f)
             {
-                // 位置入れ替え(左へ)
-                itemListFakePos = itemListCenter.transform.position;
-                itemListCenter.transform.position = itemListLeft.transform.position;
-                itemListLeft.transform.position = itemListRight.transform.position;
-                itemListRight.transform.position = itemListFakePos;
+                if (centerArrayNum != itemList.Count - 1)
+                {
+                    // 右端記憶
+                    itemListFakePos = itemList[itemList.Count - 1].transform.position;
+                    // 位置入れ替え(左へ)
+                    for (int i = itemList.Count - 1; i > 0; i--)
+                    {
+                        itemList[i].transform.position = itemList[i - 1].transform.position;
+                    }
+                    centerArrayNum++;
+
+                    // 記憶した右端を左端へ
+                    itemList[0].transform.position = itemListFakePos;
+                }
             }
         }
         else
         {
             // アイテムリスト非表示
-            if(centerPos == itemListCenter.transform.position)
+            for (int i = 0; i < itemList.Count; i++)
             {
-                itemListCenter.enabled = true;
-                itemListLeft.enabled = false;
-                itemListRight.enabled = false;
-            }
-            else if(centerPos == itemListLeft.transform.position)
-            {
-                itemListCenter.enabled = false;
-                itemListLeft.enabled = true;
-                itemListRight.enabled = false;
-            }
-            else if(centerPos == itemListRight.transform.position)
-            {
-                itemListCenter.enabled = false;
-                itemListLeft.enabled = false;
-                itemListRight.enabled = true;
+                if(i == centerArrayNum)
+                {
+                    itemList[i].gameObject.SetActive(true);
+                }
+                else
+                {
+                    itemList[i].gameObject.SetActive(false);
+                }
             }
         }
     }
