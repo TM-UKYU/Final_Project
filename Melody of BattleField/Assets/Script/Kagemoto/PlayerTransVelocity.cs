@@ -1,73 +1,78 @@
-//--ƒvƒŒƒCƒ„[‚ÌˆÚ“®ƒXƒNƒŠƒvƒg--
-// ¶‰EˆÚ“®EƒWƒƒƒ“ƒv(Rigidbody.velocity)
-// ˆÚ“®•ûŒü‚Ö‚Ì‰ñ“](Quaternion.Slerp)
-// ’n–Ê‚Æ‚Ì“–‚½‚è”»’è(RayCast)
+ï»¿//--ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç§»å‹•ã‚¹ã‚¯ãƒªãƒ—ãƒˆ--
+// å·¦å³ç§»å‹•ãƒ»ã‚¸ãƒ£ãƒ³ãƒ—(Rigidbody.velocity)
+// ç§»å‹•æ–¹å‘ã¸ã®å›è»¢(Quaternion.Slerp)
+// åœ°é¢ã¨ã®å½“ãŸã‚Šåˆ¤å®š(RayCast)
 
-//--Unity‘¤‘€ì
-// ƒXƒNƒŠƒvƒg‚ÉTPSƒJƒƒ‰‚ğİ’è
+//--Unityå´æ“ä½œ
+// ã‚¹ã‚¯ãƒªãƒ—ãƒˆã«TPSã‚«ãƒ¡ãƒ©ã‚’è¨­å®š
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerTransVelocity: MonoBehaviour
+public class PlayerTransVelocity : MonoBehaviour
 {
     private Rigidbody rbody;
 
-    // ˆÚ“®‘¬“x
+    // ç§»å‹•é€Ÿåº¦
     private float speed = 5.0f;
 
-    // ˆÚ“®—Ê
+    // ç§»å‹•é‡
     private Vector3 move;
     private float moveX = 0.0f;
     private float moveZ = 0.0f;
 
-    // ƒWƒƒƒ“ƒv
-    private float moveY = 1.0f;  // ƒWƒƒƒ“ƒv‚Ì‰‘¬
-    private bool IsGround = true;// ’n–Ê”»’è
-    private bool isJump = false; // ƒWƒƒƒ“ƒv”»’è
-    private bool maxJumpFlag = false; // Å‚‘¬‚É’B‚µ‚½‚©
-    private int offJumpClock = 0; // Å‚‘¬ŠÔ‚ÌƒJƒEƒ“ƒ^
+    // ã‚¸ãƒ£ãƒ³ãƒ—
+    private float moveY = 1.0f;  // ã‚¸ãƒ£ãƒ³ãƒ—ã®åˆé€Ÿ
+    private bool IsGround = true;// åœ°é¢åˆ¤å®š
+    private bool isJump = false; // ã‚¸ãƒ£ãƒ³ãƒ—åˆ¤å®š
+    private bool maxJumpFlag = false; // æœ€é«˜é€Ÿã«é”ã—ãŸã‹
+    private int offJumpClock = 0; // æœ€é«˜é€Ÿæ™‚é–“ã®ã‚«ã‚¦ãƒ³ã‚¿
 
-    // ƒŒƒC
+    // ãƒ¬ã‚¤
     private Ray ray;
-    private  float rayDistance = 0.5f; // ƒŒƒC‚Ì’·‚³
-    private  RaycastHit hit;           // ƒŒƒC‚Éƒqƒbƒg‚µ‚½•¨‚Ìî•ñ
-    private Vector3 rayPosition;      // ƒŒƒC‚Ì”­ËˆÊ’u
+    private float rayDistance = 0.5f; // ãƒ¬ã‚¤ã®é•·ã•
+    private RaycastHit hit;           // ãƒ¬ã‚¤ã«ãƒ’ãƒƒãƒˆã—ãŸç‰©ã®æƒ…å ±
+    private Vector3 rayPosition;      // ãƒ¬ã‚¤ã®ç™ºå°„ä½ç½®
 
-    // ‰ñ“]‘¬“x
+    // å›è»¢é€Ÿåº¦
     [SerializeField] private float applySpeed = 0.1f;
 
-    // ƒJƒƒ‰QÆ—p•Ï”(Inspector‚ÅQÆ‚·‚éƒJƒƒ‰‚ğw’è‚·‚é)
+    // ã‚«ãƒ¡ãƒ©å‚ç…§ç”¨å¤‰æ•°(Inspectorã§å‚ç…§ã™ã‚‹ã‚«ãƒ¡ãƒ©ã‚’æŒ‡å®šã™ã‚‹)
     [SerializeField] private TpsCamera refCamera;
+    [SerializeField] private Vector3 transforward;
+   
 
     void Start()
     {
-        // Rigitbody‚Ìæ“¾
+        // Rigitbodyã®å–å¾—
         rbody = GetComponent<Rigidbody>();
     }
 
     void Update()
     {
-        // ˆÚ“®•ûŒü‚É‰ñ“]
+
+        transforward = transform.forward;
+
+        // ç§»å‹•æ–¹å‘ã«å›è»¢
         {
-            // ƒvƒŒƒCƒ„[‚Ì‰ñ“](transform.rotation)
-            // ƒvƒŒƒCƒ„[‚ÌZ•ûŒü‚ğ
-            // ˆÚ“®‚Ì•ûŒü(velocity)‚É™X‚É‰ñ“]
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å›è»¢(transform.rotation)
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®Zæ–¹å‘ã‚’
+            // ç§»å‹•ã®æ–¹å‘(velocity)ã«å¾ã€…ã«å›è»¢
             if (rbody.velocity != Vector3.zero)
                 transform.rotation = Quaternion.Slerp(transform.rotation,
                                                       //Quaternion.LookRotation(rbody.velocity),
-                                                      //YˆÚ“®—Ê‚ğ–³‹
+                                                      //Yç§»å‹•é‡ã‚’ç„¡è¦–
                                                       Quaternion.LookRotation(Vector3.Scale(rbody.velocity, new Vector3(1, 0, 1)).normalized),
                                                       applySpeed);
 
         }
 
-        // ƒJƒƒ‰•ûŒü‚É‰ñ“]
+        // ã‚«ãƒ¡ãƒ©æ–¹å‘ã«å›è»¢
         {
-            // ƒvƒŒƒCƒ„[‚Ì‰ñ“](transform.rotation)
-            // ƒvƒŒƒCƒ„[‚ÌZ•ûŒü‚ğ
-            // ƒJƒƒ‰‚Ì…•½‰ñ“]•ûŒü(refCamera.transform.rotation)‚É™X‚É‰ñ“]
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å›è»¢(transform.rotation)
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®Zæ–¹å‘ã‚’
+            // ã‚«ãƒ¡ãƒ©ã®æ°´å¹³å›è»¢æ–¹å‘(refCamera.transform.rotation)ã«å¾ã€…ã«å›è»¢
             /*
             transform.rotation = Quaternion.Slerp(transform.rotation,
                                                   Quaternion.LookRotation(refCamera.transform.rotation * rbody.velocity),
@@ -75,39 +80,39 @@ public class PlayerTransVelocity: MonoBehaviour
             */
         }
 
-        // ƒJƒƒ‰‚Ì•ûŒü‚É‰ñ“]
+        // ã‚«ãƒ¡ãƒ©ã®æ–¹å‘ã«å›è»¢
         //transform.eulerAngles = refCamera.transform.eulerAngles;
 
-        // ˆÚ“®—Ê‚ÌŒvZ(ƒL[“ü—Í * ˆÚ“®‘¬“x)
-        moveX = Input.GetAxis("Horizontal") * speed; // ¶‰E
-        moveZ = Input.GetAxis("Vertical") * speed;   // ‘OŒã
+        // ç§»å‹•é‡ã®è¨ˆç®—(ã‚­ãƒ¼å…¥åŠ› * ç§»å‹•é€Ÿåº¦)
+        moveX = Input.GetAxis("Horizontal") * speed; // å·¦å³
+        moveZ = Input.GetAxis("Vertical") * speed;   // å‰å¾Œ
 
-        // ƒJƒƒ‰‚Ì•ûŒü(ƒJƒƒ‰‚ªã‚ğŒü‚¢‚Ä‚¢‚éê‡‚É”õ‚¦‚‚³¬•ª‚ğæ‚èœ‚­)
+        // ã‚«ãƒ¡ãƒ©ã®æ–¹å‘(ã‚«ãƒ¡ãƒ©ãŒä¸Šã‚’å‘ã„ã¦ã„ã‚‹å ´åˆã«å‚™ãˆé«˜ã•æˆåˆ†ã‚’å–ã‚Šé™¤ã)
         Vector3 cameraForward = Vector3.Scale(refCamera.transform.forward, new Vector3(1, 0, 1)).normalized;
         Vector3 cameraRight = Vector3.Scale(refCamera.transform.right, new Vector3(1, 0, 1)).normalized;
 
-        // ƒJƒƒ‰‚Ì•ûŒü‚ğŠî€‚ÉˆÚ“®•ûŒü‚ğŒˆ’è
+        // ã‚«ãƒ¡ãƒ©ã®æ–¹å‘ã‚’åŸºæº–ã«ç§»å‹•æ–¹å‘ã‚’æ±ºå®š
         move = cameraForward * moveZ + cameraRight * moveX;
 
-        // ƒŒƒC‚Ì’n–Ê”»’è
-        rayPosition = transform.position + new Vector3(0.0f, 0.5f, 0.0f); // ƒŒƒC‚Ì’·‚³•ªƒvƒŒƒCƒ„-À•W‚©‚ç•‚‚©‚¹‚é
-        ray = new Ray(rayPosition, transform.up * -1); //ƒŒƒC‚ğ‰º‚É”­Ë
-        Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.red); //ƒŒƒC‚ğÔF•\¦
+        // ãƒ¬ã‚¤ã®åœ°é¢åˆ¤å®š
+        rayPosition = transform.position + new Vector3(0.0f, 0.5f, 0.0f); // ãƒ¬ã‚¤ã®é•·ã•åˆ†ãƒ—ãƒ¬ã‚¤ãƒ¤-åº§æ¨™ã‹ã‚‰æµ®ã‹ã›ã‚‹
+        ray = new Ray(rayPosition, transform.up * -1); //ãƒ¬ã‚¤ã‚’ä¸‹ã«ç™ºå°„
+        Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.red); //ãƒ¬ã‚¤ã‚’èµ¤è‰²è¡¨ç¤º
 
-        if (Physics.Raycast(ray, out hit, rayDistance)) // ƒŒƒC‚ª“–‚½‚Á‚½‚Ìˆ—
+        if (Physics.Raycast(ray, out hit, rayDistance)) // ãƒ¬ã‚¤ãŒå½“ãŸã£ãŸæ™‚ã®å‡¦ç†
         {
-            IsGround = true; // ’n–Ê‚ÉG‚ê‚½‚±‚Æ‚É‚·‚é
+            IsGround = true; // åœ°é¢ã«è§¦ã‚ŒãŸã“ã¨ã«ã™ã‚‹
 
         }
         else
         {
-            IsGround = false; // ’n–Ê‚ÉG‚ê‚Ä‚È‚¢‚±‚Æ‚É‚·‚é
+            IsGround = false; // åœ°é¢ã«è§¦ã‚Œã¦ãªã„ã“ã¨ã«ã™ã‚‹
 
         }
-        // ’n–Ê‚ÉG‚ê‚Ä‚¢‚½‚ç
+        // åœ°é¢ã«è§¦ã‚Œã¦ã„ãŸã‚‰
         if (IsGround)
         {
-            // ƒWƒƒƒ“ƒv•Ï”ŠÖ˜A
+            // ã‚¸ãƒ£ãƒ³ãƒ—å¤‰æ•°é–¢é€£
             {
                 maxJumpFlag = false;
                 moveY = 1.0f;
@@ -115,61 +120,61 @@ public class PlayerTransVelocity: MonoBehaviour
                 isJump = false;
             }
 
-            rbody.useGravity = false; //@d—Í‚ğƒIƒt
-            // ƒWƒƒƒ“ƒv
+            rbody.useGravity = false; //ã€€é‡åŠ›ã‚’ã‚ªãƒ•
+            // ã‚¸ãƒ£ãƒ³ãƒ—
             if (Input.GetKey(KeyCode.Space))
             {
                 isJump = true;
-                IsGround = false;// ’n–Ê”»’èƒIƒt
+                IsGround = false;// åœ°é¢åˆ¤å®šã‚ªãƒ•
             }
         }
         else
         {
-            // Ú’n‚È‚µ&ƒWƒƒƒ“ƒv’†‚Å‚Í‚È‚¢
+            // æ¥åœ°ãªã—&ã‚¸ãƒ£ãƒ³ãƒ—ä¸­ã§ã¯ãªã„
             if (!isJump)
             {
-                // d—Í‚ğƒIƒ“
+                // é‡åŠ›ã‚’ã‚ªãƒ³
                 rbody.useGravity = true;
             }
         }
 
-        // ƒWƒƒƒ“ƒvƒtƒ‰ƒO
+        // ã‚¸ãƒ£ãƒ³ãƒ—ãƒ•ãƒ©ã‚°
         if (isJump) { Jump(); }
 
-        // ˆÚ“®—Ê‚ğ‰Á‚¦‚é
+        // ç§»å‹•é‡ã‚’åŠ ãˆã‚‹
         rbody.velocity = move;
     }
 
-    // ƒWƒƒƒ“ƒvŠÖ”(‰¼)
+    // ã‚¸ãƒ£ãƒ³ãƒ—é–¢æ•°(ä»®)
     void Jump()
     {
-        move = new Vector3(move.x, moveY, move.z);// ˆÚ“®—Ê‚ÉƒWƒƒƒ“ƒv—Í‚ğ‰Á‚¦‚é
+        move = new Vector3(move.x, moveY, move.z);// ç§»å‹•é‡ã«ã‚¸ãƒ£ãƒ³ãƒ—åŠ›ã‚’åŠ ãˆã‚‹
         if (maxJumpFlag == false)
-        { // Å‚‘¬‚É’B‚µ‚Ä‚¢‚È‚¢‚È‚ç
-            if (moveY <= 3.0f) // Å‚‘¬“xˆÈ‰º‚È‚ç
+        { // æœ€é«˜é€Ÿã«é”ã—ã¦ã„ãªã„ãªã‚‰
+            if (moveY <= 3.0f) // æœ€é«˜é€Ÿåº¦ä»¥ä¸‹ãªã‚‰
             {
-                moveY += 0.1f; // ‰Á‘¬
+                moveY += 0.1f; // åŠ é€Ÿ
             }
             else
             {
                 maxJumpFlag = true;
             }
         }
-        // Å‚‘¬‚É’B‚µ‚½‚È‚ç
+        // æœ€é«˜é€Ÿã«é”ã—ãŸãªã‚‰
         else
         {
-            // ƒJƒEƒ“ƒg
+            // ã‚«ã‚¦ãƒ³ãƒˆ
             offJumpClock++;
-            // 60ƒtƒŒ[ƒ€Œo‰ß‚µ‚½‚ç
+            // 60ãƒ•ãƒ¬ãƒ¼ãƒ çµŒéã—ãŸã‚‰
             if (offJumpClock > 60)
             {
                 if (moveY >= 1.0f)
-                { // Å’á‘¬“xˆÈã‚È‚ç
-                    moveY -= 0.05f; // Œ¸‘¬
+                { // æœ€ä½é€Ÿåº¦ä»¥ä¸Šãªã‚‰
+                    moveY -= 0.05f; // æ¸›é€Ÿ
                 }
                 else
                 {
-                    // ‰‘¬‚É–ß‚Á‚½‚çƒWƒƒƒ“ƒvI—¹
+                    // åˆé€Ÿã«æˆ»ã£ãŸã‚‰ã‚¸ãƒ£ãƒ³ãƒ—çµ‚äº†
                     isJump = false;
                 }
             }

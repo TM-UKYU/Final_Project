@@ -1,11 +1,11 @@
-//--ƒJƒƒ‰‚ÌTPS’Ç]ƒXƒNƒŠƒvƒg--
-// ƒvƒŒƒCƒ„[‚Ö‚Ì’Ç]
-// ƒ}ƒEƒXˆÚ“®‚Å‚Ì‹“_‰ñ“]
+ï»¿//--ã‚«ãƒ¡ãƒ©ã®TPSè¿½å¾“ã‚¹ã‚¯ãƒªãƒ—ãƒˆ--
+// ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¸ã®è¿½å¾“
+// ãƒã‚¦ã‚¹ç§»å‹•ã§ã®è¦–ç‚¹å›è»¢
 
-//--Unity‘¤‘€ì
-// ‹óƒIƒuƒWƒFƒNƒg‚ÉƒXƒNƒŠƒvƒg‚ğİ’è
-// ƒXƒNƒŠƒvƒg‚É’Ç]‚·‚éƒvƒŒƒCƒ„[‚ğİ’è
-// ƒƒCƒ“ƒJƒƒ‰‚ğ‹óƒIƒuƒWƒFƒNƒg‚Ìq‚Éİ’è
+//--Unityå´æ“ä½œ
+// ç©ºã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã«ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’è¨­å®š
+// ã‚¹ã‚¯ãƒªãƒ—ãƒˆã«è¿½å¾“ã™ã‚‹ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¨­å®š
+// ãƒ¡ã‚¤ãƒ³ã‚«ãƒ¡ãƒ©ã‚’ç©ºã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å­ã«è¨­å®š
 
 using System.Collections;
 using System.Collections.Generic;
@@ -13,29 +13,29 @@ using UnityEngine;
 
 public class TpsCamera : MonoBehaviour
 {
-    // “ü—Í’l(Inspector‚Åİ’è)
-    [SerializeField] Transform Player;  // ’Ç]‘ÎÛ
-    [SerializeField] float RotateSpeed; // ‰ñ“]‘¬“x
+    // å…¥åŠ›å€¤(Inspectorã§è¨­å®š)
+    [SerializeField] Transform Player;  // è¿½å¾“å¯¾è±¡
+    [SerializeField] float RotateSpeed; // å›è»¢é€Ÿåº¦
 
     float side, forward;
 
     private void Start()
     {
-        // ‰ñ“]‘¬“x
+        // å›è»¢é€Ÿåº¦
         RotateSpeed = 1;
     }
 
     void Update()
     {
-        // ƒvƒŒƒCƒ„[ˆÊ’u‚ğ’Ç]‚·‚é
+        // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ä½ç½®ã‚’è¿½å¾“ã™ã‚‹
         transform.position = new Vector3(Player.position.x, transform.position.y, Player.position.z);
 
-        // ƒ}ƒEƒX‚É‚æ‚é‰ñ“]
-        side += Input.GetAxis("Mouse X") * RotateSpeed; // ‰¡‰ñ“]“ü—Í
-        forward -= Input.GetAxis("Mouse Y") * RotateSpeed; // c‰ñ“]“ü—Í
+        // ãƒã‚¦ã‚¹ã«ã‚ˆã‚‹å›è»¢
+        side += Input.GetAxis("Mouse X") * RotateSpeed; // æ¨ªå›è»¢å…¥åŠ›
+        forward -= Input.GetAxis("Mouse Y") * RotateSpeed; // ç¸¦å›è»¢å…¥åŠ›
 
-        forward = Mathf.Clamp(forward, -80, 60); //c‰ñ“]‚ÌŠp“x§ŒÀ
+        forward = Mathf.Clamp(forward, -80, 60); //ç¸¦å›è»¢ã®è§’åº¦åˆ¶é™
 
-        transform.eulerAngles = new Vector3(forward, side, 0.0f); // ‰ñ“]‚ÌÀs
+        transform.eulerAngles = new Vector3(forward, side, 0.0f); // å›è»¢ã®å®Ÿè¡Œ
     }
 }
