@@ -17,6 +17,9 @@ public class SceneFadeManager : MonoBehaviour
     float red, green, blue, alfa;
     //シーン遷移のための型
     string afterScene;
+    //最初にフェードイン処理をするかのフラグ
+    [SerializeField]
+    private bool isFadeInEnable = true;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +28,10 @@ public class SceneFadeManager : MonoBehaviour
         SetRGBA(0, 0, 0, 1);
         //シーン遷移が完了した際にフェードインを開始するように設定
         SceneManager.sceneLoaded += fadeInStart;
+        if (!isFadeInEnable)
+        {
+            alfa = 0;
+        }
     }
 
     //シーン遷移が完了した際にフェードインを開始するように設定
