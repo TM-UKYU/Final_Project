@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TitleScene.unity
     guid: 5e0318fa6ab44a842ba541421acd18cc
+  - enabled: 1
+    path: Assets/Scenes/CrabBossScene.unity
+    guid: 834ef8ed006ce4748a8f2de83c76eddc
+  - enabled: 1
+    path: Assets/Scenes/WeaponScene.unity
+    guid: 4d03413d736d9584d9fc25143dda1b4e
   m_configObjects: {}
