@@ -30,6 +30,7 @@ public class PlayerTransVelocity : MonoBehaviour
     private int offJumpClock = 0; // 最高速時間のカウンタ
 
     private bool IsStep; // ステップ中かどうか
+    private float time;
 
     // レイ
     private Ray ray;
@@ -84,6 +85,27 @@ public class PlayerTransVelocity : MonoBehaviour
 
         // カメラの方向に回転
         //transform.eulerAngles = refCamera.transform.eulerAngles;
+        if (Input.GetKeyDown("left shift"))
+        {
+            IsStep = true;
+        }
+        
+        if (IsStep)
+        {
+            speed = 30.0f;
+           
+            time+= Time.deltaTime;
+            if (time > 0.5f) {
+                IsStep = false;
+            }
+        }
+        else
+        {
+            speed = 5.0f;
+            time = 0.0f;
+        }
+      
+        
 
         // 移動量の計算(キー入力 * 移動速度)
         moveX = Input.GetAxis("Horizontal") * speed; // 左右
