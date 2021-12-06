@@ -29,6 +29,8 @@ public class PlayerTransVelocity : MonoBehaviour
     private bool maxJumpFlag = false; // 最高速に達したか
     private int offJumpClock = 0; // 最高速時間のカウンタ
 
+    private bool IsStep; // ステップ中かどうか
+
     // レイ
     private Ray ray;
     private float rayDistance = 0.5f; // レイの長さ
