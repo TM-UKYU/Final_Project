@@ -10,9 +10,9 @@ public class StageAccessor : MonoBehaviour
         Debug.Log(StageInformation.Stage);
     }
 
-    public void SetNormalStage()
+    public void SetDragonStage()
     {
-        StageInformation.Stage = StageInformation.STAGE_ID.NORMAL;
+        StageInformation.Stage = StageInformation.STAGE_ID.DRAGON;
     }
 
     public void SetHardStage()

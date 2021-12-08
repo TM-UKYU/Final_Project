@@ -142,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &149571914
 RectTransform:
   m_ObjectHideFlags: 0
@@ -219,6 +219,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 732770894}
+        m_TargetAssemblyTypeName: StageAccessor, Assembly-CSharp
+        m_MethodName: SetDragonStage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &149571916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e2939cc18853424a89ffa671c363c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneName: MainScene
+  nextSceneName: WeaponScene
 --- !u!1 &379049294
 GameObject:
   m_ObjectHideFlags: 0
@@ -1289,7 +1301,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1634968914
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1564,7 +1576,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Normal
+  m_Text: Dragon
 --- !u!222 &1698926642
 CanvasRenderer:
   m_ObjectHideFlags: 0

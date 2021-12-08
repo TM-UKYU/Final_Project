@@ -21,9 +21,23 @@ public class ChangeScene : MonoBehaviour
         fadeManager = manageObject.GetComponent<SceneFadeManager>();
     }
 
-    // シーン遷移
+    // 通常シーン遷移
     public void LoadNextScene()
     {
+        //SceneFadeManagerの中のフェードアウト開始関数を呼び出し
+        fadeManager.fadeOutStart(0, 0, 0, 0, nextSceneName);
+    }
+
+    // 分岐シーン遷移
+    public void LoadBattleScene()
+    {
+        switch(StageInformation.Stage)
+        {
+            case StageInformation.STAGE_ID.CRAB: nextSceneName = "CrabBossScene";Debug.Log("CrabBossScene"); break;
+            case StageInformation.STAGE_ID.DRAGON: nextSceneName = "DragonScene";break;
+            default: break;
+        }
+
         //SceneFadeManagerの中のフェードアウト開始関数を呼び出し
         fadeManager.fadeOutStart(0, 0, 0, 0, nextSceneName);
     }

@@ -7,7 +7,7 @@ public class StageInformation : MonoBehaviour
     public enum STAGE_ID
     {
         CRAB,
-        NORMAL,
+        DRAGON,
         HARD
     };
 
