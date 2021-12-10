@@ -19,8 +19,6 @@ public class SearchCharacter : MonoBehaviour
     {
         // InspectorタブのonTriggerStayで指定された処理を実行する
         onTriggerStay.Invoke(other);
-        Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-
     }
 
     private void OnTriggerExit(Collider other)

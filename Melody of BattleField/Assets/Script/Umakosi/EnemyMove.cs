@@ -167,12 +167,12 @@ public class EnemyMove : MonoBehaviour
 
     public void AnimEnd()
     {
-        if (anim.GetComponent<Anim>().animEnd)
-        {
-            anim.GetComponent<Anim>().animEnd = false;
-            num = 3;
-            Debug.Log("HitèIÇÌÇË");
-        }
+        //if (anim.GetComponent<Anim>().animEnd)
+        //{
+        //    anim.GetComponent<Anim>().animEnd = false;
+        //    num = 3;
+        //    Debug.Log("HitèIÇÌÇË");
+        //}
     }
 
     private void Protect()

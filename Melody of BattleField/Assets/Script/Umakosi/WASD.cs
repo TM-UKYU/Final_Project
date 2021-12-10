@@ -7,10 +7,21 @@ public class WASD : MonoBehaviour
     public float moveSpeed = 1;
     public float rotSpped = 1;
     private int doubleClick;
-    private int frame=400;
+    private int frame = 400;
+    private GameObject mainCamera;
+    private void Start()
+    {
+        mainCamera = Camera.main.gameObject;
+    }
 
     // Update is called once per frame
     void Update()
+    {
+        Move();
+    }
+
+
+    private void Move()
     {
         if (Input.GetKey(KeyCode.W))
         {
@@ -22,11 +33,11 @@ public class WASD : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Rotate(0, -rotSpped * Time.deltaTime, 0);
+            transform.Translate(-moveSpeed * Time.deltaTime, 0, 0);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Rotate(0, rotSpped * Time.deltaTime, 0);
+            transform.Translate(moveSpeed * Time.deltaTime, 0, 0);
         }
 
         frame--;
@@ -55,6 +66,5 @@ public class WASD : MonoBehaviour
             }
             Debug.Log(doubleClick);
         }
-
     }
 }

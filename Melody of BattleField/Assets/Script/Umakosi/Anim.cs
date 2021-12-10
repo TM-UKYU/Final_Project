@@ -6,13 +6,12 @@ public class Anim : MonoBehaviour
 {
     private Animator animator;
     AnimatorStateInfo stateInfo;
-    public bool animEnd;
+
 
     void Start()
     {
         animator = GetComponent<Animator>();
 
-        animEnd = false;
     }
 
     // Update is called once per frame
@@ -47,12 +46,6 @@ public class Anim : MonoBehaviour
         Debug.Log("Hit");
     }
 
-    public void AnimEnd()
-    {
-        animEnd = true;
-        Debug.Log("HitAnimEnd");
-    }
-
     public void ProtectAnim()
     {
         animator.Play("Protect");
@@ -70,6 +63,13 @@ public class Anim : MonoBehaviour
         Debug.Log("wwwwww");
     }
 
+    public float AnimEnd()
+    {
+        Debug.Log("AnimEnd");
+
+        return animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+    }
+
     //dragon特有アニメーション//////////////////////////////////////////
     public void FireBallAnim()
     {
@@ -83,6 +83,24 @@ public class Anim : MonoBehaviour
         Debug.Log("FlyFireBall");
     }
     
+    public void FlyAnim()
+    {
+        animator.Play("Fly");
+        Debug.Log("FlyAnim");
+    }
+
+    public void FlyFloatAnim()
+    {
+        animator.Play("Fly Float");
+        Debug.Log("Fly Float");
+    }
+
+    public void FlyGlide()
+    {
+        animator.Play("FlyGlide");
+        Debug.Log("Fly Glide");
+    }
+    
     public void TailAttackAnim()
     {
         animator.Play("TailAttack");
@@ -93,13 +111,24 @@ public class Anim : MonoBehaviour
     {
         animator.Play("Sleep");
         Debug.Log("Sleep");
-    }
+    } 
     
+    public void IdleAnim()
+    {
+        animator.Play("Idle");
+        Debug.Log("Idle");
+    }
+
     public void TakeOffAnim()
     {
         animator.Play("TakeOff");
         Debug.Log("TakeOff");
     }
 
+    public void LandAnim()
+    {
+        animator.Play("Land");
+        Debug.Log("Land");
+    }
 
 }
