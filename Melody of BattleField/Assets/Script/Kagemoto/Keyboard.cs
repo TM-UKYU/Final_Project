@@ -61,7 +61,7 @@ public class Keyboard : MonoBehaviour
             // 各種初期値設定
             betweenTime = 1.0f; // 最初は発射可能
             shootPower = 1.0f; // 初期速度
-            raiseY = 1.3f;
+            //raiseY = 1.3f;
             moveZ = 1.0f;
             waveSpanTime = 0.4f;
             waveSpanFar = 0.5f;

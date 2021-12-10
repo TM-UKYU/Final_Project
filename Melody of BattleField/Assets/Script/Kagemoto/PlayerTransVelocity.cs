@@ -123,44 +123,44 @@ public class PlayerTransVelocity : MonoBehaviour
         ray = new Ray(rayPosition, transform.up * -1); //レイを下に発射
         Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.red); //レイを赤色表示
 
-        if (Physics.Raycast(ray, out hit, rayDistance)) // レイが当たった時の処理
-        {
-            IsGround = true; // 地面に触れたことにする
+        //if (Physics.Raycast(ray, out hit, rayDistance)) // レイが当たった時の処理
+        //{
+        //    IsGround = true; // 地面に触れたことにする
 
-        }
-        else
-        {
-            IsGround = false; // 地面に触れてないことにする
+        //}
+        //else
+        //{
+        //    IsGround = false; // 地面に触れてないことにする
 
-        }
-        // 地面に触れていたら
-        if (IsGround)
-        {
-            // ジャンプ変数関連
-            {
-                maxJumpFlag = false;
-                moveY = 1.0f;
-                offJumpClock = 0;
-                isJump = false;
-            }
+        //}
+        //// 地面に触れていたら
+        //if (IsGround)
+        //{
+        //    // ジャンプ変数関連
+        //    {
+        //        maxJumpFlag = false;
+        //        moveY = 1.0f;
+        //        offJumpClock = 0;
+        //        isJump = false;
+        //    }
 
-            rbody.useGravity = false; //　重力をオフ
-            // ジャンプ
-            if (Input.GetKey(KeyCode.Space))
-            {
-                isJump = true;
-                IsGround = false;// 地面判定オフ
-            }
-        }
-        else
-        {
-            // 接地なし&ジャンプ中ではない
-            if (!isJump)
-            {
-                // 重力をオン
-                rbody.useGravity = true;
-            }
-        }
+        //    rbody.useGravity = false; //　重力をオフ
+        //    // ジャンプ
+        //    if (Input.GetKey(KeyCode.Space))
+        //    {
+        //        isJump = true;
+        //        IsGround = false;// 地面判定オフ
+        //    }
+        //}
+        //else
+        //{
+        //    // 接地なし&ジャンプ中ではない
+        //    if (!isJump)
+        //    {
+        //        // 重力をオン
+        //        rbody.useGravity = true;
+        //    }
+        //}
 
         // ジャンプフラグ
         if (isJump) { Jump(); }

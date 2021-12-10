@@ -76,20 +76,23 @@ public class NoteMove : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         GameObject hitObj = collision.gameObject;
-        GetPlayerAttack scEnemy = hitObj.GetComponent<GetPlayerAttack>();
+        if (hitObj.CompareTag("Enemy"))
+        {
+            //GetPlayerAttack scEnemy = hitObj.GetComponent<GetPlayerAttack>();
 
-        //audioSource.PlayOneShot(noteColSE);
-        AudioManager scAudio = refAudioManager.GetComponent<AudioManager>();
-        scAudio.PlaySE(noteColSE);
+            //audioSource.PlayOneShot(noteColSE);
+            AudioManager scAudio = refAudioManager.GetComponent<AudioManager>();
+            scAudio.PlaySE(noteColSE);
 
-        scEnemy.SetDamage(2);
-        Destroy(this.gameObject);
-        Debug.Log("当たった!");
+            //scEnemy.SetDamage(2);
+            Destroy(this.gameObject);
+            Debug.Log("当たった!");
 
-        // 衝突パーティクル生成
-        GameObject colEffectObj = Instantiate(
-                       PrefabColEffect,
-                       transform.position,
-                       Quaternion.identity);
+            // 衝突パーティクル生成
+            GameObject colEffectObj = Instantiate(
+                           PrefabColEffect,
+                           transform.position,
+                           Quaternion.identity);
+        }
     }
 }
