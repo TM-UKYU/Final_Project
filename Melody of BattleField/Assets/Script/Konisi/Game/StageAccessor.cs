@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StageAccessor : MonoBehaviour
 {
+    // ステージの各情報をStageInformationに渡す
     public void SetCrabStage()
     {
         StageInformation.Stage = StageInformation.STAGE_ID.CRAB;
@@ -22,17 +23,11 @@ public class StageAccessor : MonoBehaviour
 
     public void SetKeyBoardWeapon()
     {
-        StageInformation.Weapon = StageInformation.WEAPON_ID.KeyBoard;
+        StageInformation.Weapon = StageInformation.WEAPON_ID.KEYBOARD;
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void SetGuitar()
     {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        StageInformation.Weapon = StageInformation.WEAPON_ID.GUITAR;
     }
 }

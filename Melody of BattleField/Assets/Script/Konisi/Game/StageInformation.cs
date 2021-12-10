@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StageInformation : MonoBehaviour
 {
+    // ステージ
     public enum STAGE_ID
     {
         CRAB,
@@ -11,9 +12,11 @@ public class StageInformation : MonoBehaviour
         HARD
     };
 
+    // 武器
     public enum WEAPON_ID
     {
-        KeyBoard
+        KEYBOARD,
+        GUITAR
     }
 
     public static STAGE_ID Stage;
@@ -22,6 +25,7 @@ public class StageInformation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // シーンが遷移した後も消えないように
         DontDestroyOnLoad(this);
     }
 
