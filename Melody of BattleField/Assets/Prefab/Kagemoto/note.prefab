@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40af7579701ab9948b65802d5a46cc33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Master: {fileID: 6610123520467152852, guid: d66ad24e6e5f6b348b2bcbfc4d64d233, type: 3}
+  Master: {fileID: 9013294995208839728, guid: 99ee7a3145600be4686b3ff829fc203a, type: 3}
   DestroyTime: 10
   PrefabColEffect: {fileID: 613608268062933142, guid: d019acdeacdd6274da6e747b55a16279, type: 3}
   noteColSE: {fileID: 8300000, guid: b0f7be9fd876f2940ac7bc2a14ee742f, type: 3}
