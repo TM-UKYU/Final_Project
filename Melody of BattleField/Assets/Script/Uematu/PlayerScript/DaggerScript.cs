@@ -1,0 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class DaggerScript : MonoBehaviour
+{
+    void EndEvent()
+    {
+        Debug.Log("É_ÉKÅ[çÌèú");
+        Destroy(gameObject);
+    }
+}
