@@ -14,6 +14,9 @@ public class DragonEnemyMove : MonoBehaviour
     public float jumpAttackspeed;   //ジャンプ攻撃のスピード
     private Vector3 latestPos;
 
+    public bool isFly;
+    private bool isTukiage;
+
     private bool longAttackFlg;  //遠距離攻撃に入るフラグ(ヒエラルキー内のSearchAreaに入ったらtrue)
     private bool shortAttackFlg; //近距離攻撃に入るフラグ(ヒエラルキー内のAttackに入ったらtrue)
     private Vector3 player;      //操作キャラの座標取得
@@ -36,6 +39,7 @@ public class DragonEnemyMove : MonoBehaviour
     private GameObject anim;
     private GameObject p;
     private GameObject bullet;
+    private GameObject Sphere;
     /// //////////////////////////////
 
     public enum Hp_State
@@ -64,7 +68,9 @@ public class DragonEnemyMove : MonoBehaviour
         Action_Back,
         Action_Land,
         Action_FlyFloat,
-        Action_Wait
+        Action_Wait,
+        Action_Walk,
+        Action_Tukiage
     }
 
     private Action_State action_State;
@@ -90,28 +96,30 @@ public class DragonEnemyMove : MonoBehaviour
         finishFireBall = false;
         longAttackFlg = false;
         shortAttackFlg = false;
+        isTukiage = false;
         rb = GetComponent<Rigidbody>();
         prowling = GameObject.Find("enemy");
         anim = GameObject.Find("enemy");
         p = GameObject.Find("Player");
         bullet = GameObject.Find("FireBallPoint");
+        Sphere = GameObject.Find("Sphere");
 
         if (Random.Range(1, 10) == 1)
         {
-            action_State = Action_State.Action_Patrol;
+            action_State = Action_State.Action_Sleep;
         }
         else
         {
-            action_State = Action_State.Action_Patrol;
+            action_State = Action_State.Action_Sleep;
         }
         hp_State = Hp_State.Hp_Energetic;
 
-        countDown = 1;
+        countDown = 2;
     }
 
     private void Update()
     {
-        player = p.transform.position;    
+        player = p.transform.position;
 
         if (hp < 0)
         {
@@ -136,7 +144,7 @@ public class DragonEnemyMove : MonoBehaviour
                 break;
 
             case Action_State.Action_FireBall:
-                FireBall(fireBallMax);
+                FireBall(fireBallMax, isFly);
                 break;
 
             case Action_State.Action_Chase:
@@ -172,6 +180,10 @@ public class DragonEnemyMove : MonoBehaviour
                 FlyTackle();
                 break;
 
+            case Action_State.Action_Tukiage:
+                Tukiage();
+                break;
+
             case Action_State.Action_Sleep:
                 SleepAnim();
                 break;
@@ -190,6 +202,10 @@ public class DragonEnemyMove : MonoBehaviour
 
             case Action_State.Action_Wait:
                 Wait();
+                break;
+
+            case Action_State.Action_Walk:
+                Walk();
                 break;
         }
 
@@ -234,11 +250,13 @@ public class DragonEnemyMove : MonoBehaviour
         switch (hp_State)
         {
             case Hp_State.Hp_Energetic:
-                Walk();
+                action_State = Action_State.Action_Walk;
+                coolTime = 0;
                 break;
 
             case Hp_State.Hp_Low:
-                Chase();
+                action_State = Action_State.Action_Chase;
+                coolTime = 0;
                 break;
 
             case Hp_State.Hp_Moribund:
@@ -255,13 +273,20 @@ public class DragonEnemyMove : MonoBehaviour
 
         //nextNum = Action_State.Action_FlyTackle;
 
-        coolTime = 600.0f;
+
     }
 
-    private void FireBall(int fireMax)
+    private void FireBall(int fireMax, bool isFly)
     {
         transform.LookAt(player);
-        anim.GetComponent<Anim>().FireBallAnim();
+        if (isFly)
+        {
+            anim.GetComponent<Anim>().FlyFireBallAnim();
+        }
+        else
+        {
+            anim.GetComponent<Anim>().FireBallAnim();
+        }
 
         if (fireBallFlg)
         {
@@ -271,9 +296,16 @@ public class DragonEnemyMove : MonoBehaviour
 
         if (fireBallNum >= fireMax && finishFireBall)
         {
-            action_State = Action_State.Action_TakeOff;
-
-            nextNum = Action_State.Action_Wait;
+            if (isFly)
+            {
+                action_State = Action_State.Action_Land;
+            }
+            else
+            {
+                action_State = Action_State.Action_TakeOff;
+            }
+            coolTime = 600.0f;
+            //nextNum = Action_State.Action_Wait;
 
             //action_State = Action_State.Action_Chase;
             weight = 0;
@@ -302,7 +334,7 @@ public class DragonEnemyMove : MonoBehaviour
 
     private void Walk()
     {
-        transform.Translate(0, 0,  walkSpeed* Time.deltaTime);
+        transform.Translate(0, 0, walkSpeed * Time.deltaTime);
         WalkAnim();
     }
 
@@ -333,14 +365,15 @@ public class DragonEnemyMove : MonoBehaviour
         {
             transform.rotation = Quaternion.LookRotation(diff); //向きを変更する
         }
- 
+
     }
     private void FlyTackle()
     {
         countDown -= Time.deltaTime;
 
-        if (countDown < 0)
+        if (countDown < 1)
         {
+            Invoke("ActionChange", 3.0f);
             transform.Translate(0, 0, 50 * Time.deltaTime);
             anim.GetComponent<Anim>().FlyGlide();
         }
@@ -362,6 +395,45 @@ public class DragonEnemyMove : MonoBehaviour
 
         //transform.position = Vector3.MoveTowards(transform.position, player, speed);
 
+    }
+
+    private void ActionChange()
+    {
+        Debug.Log("突き上げ攻撃");
+
+        action_State = Action_State.Action_Tukiage;
+        coolTime = 1000;
+    }
+
+    private void Tukiage()
+    {
+        if (Vector3.Distance(transform.position, Sphere.transform.position) < 1.0f)
+        {
+            //transform.rotation.ToAngleAxis(out float angle, out Vector3 axis);
+            //nowAngle = angle;
+            //if (nowAngle>0)
+            //{
+            //    transform.Rotate(-0.03f, 0, 0);
+            //    Debug.Log("突き上げ終了");
+
+            //}
+
+            action_State = Action_State.Action_Land;
+            transform.rotation = Quaternion.AngleAxis(0.0f, new Vector3(1, 0, 0));
+        }
+        else
+        {
+            transform.LookAt(Sphere.transform);
+            transform.Translate(0, 0, 75 * Time.deltaTime);
+            //Invoke("abc", 5.0f);
+        }
+    }
+
+    private void abc()
+    {
+        isTukiage = true;
+        Vector3 direction = this.transform.up;
+        this.GetComponent<Rigidbody>().AddForce(direction * 25, ForceMode.Impulse);
     }
 
     private void Back()
@@ -417,7 +489,7 @@ public class DragonEnemyMove : MonoBehaviour
             action_State = Action_State.Action_Revolve;
             center = p.transform.position;
         }
-        else if (nextNum == Action_State.Action_Wait)
+        else
         {
             action_State = Action_State.Action_Land;
         }
@@ -427,7 +499,7 @@ public class DragonEnemyMove : MonoBehaviour
     {
         anim.GetComponent<Anim>().FlyFireBallAnim();
     }
-    
+
     private void WalkAnim()
     {
         anim.GetComponent<Anim>().WalkAnim();
@@ -441,13 +513,13 @@ public class DragonEnemyMove : MonoBehaviour
     private void TakeOffAnim()
     {
         anim.GetComponent<Anim>().TakeOffAnim();
-    } 
-    
+    }
+
     private void LandAnim()
     {
         anim.GetComponent<Anim>().LandAnim();
     }
-    
+
     private void FlyFloatAnim()
     {
         anim.GetComponent<Anim>().FlyFloatAnim();
@@ -475,10 +547,10 @@ public class DragonEnemyMove : MonoBehaviour
 
     public void OutShortRange(Collider collider)
     {
-        if (!CoolTime(coolTime, nextNum)) { return; }
 
         if (CompareTag("Player", collider))
         {
+            if (!CoolTime(coolTime, nextNum)) { return; }
             shortAttackFlg = false;
             action_State = Action_State.Action_Chase;
         }
@@ -529,7 +601,8 @@ public class DragonEnemyMove : MonoBehaviour
     }
     void OnCollisionStay(Collision other)//  地面に触れた時の処理
     {
-        if (!CoolTime(coolTime, nextNum)) { return; }
+
+        Debug.Log("着地");
 
         if (other.gameObject.tag == "Ground")
         {
@@ -537,6 +610,8 @@ public class DragonEnemyMove : MonoBehaviour
 
             isGround = true;//  Groundedをtrueにする
         }
+
+
     }
 
     private bool CompareTag(string tagName, Collider collider)
