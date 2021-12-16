@@ -100,4 +100,4 @@ Thumbs.db
 sysinfo.txt #Unity3D Generated File On Crash Reports
 
 # ログファイル
-*.png
+*.log
