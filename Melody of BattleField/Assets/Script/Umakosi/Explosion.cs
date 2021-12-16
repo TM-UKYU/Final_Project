@@ -26,7 +26,7 @@ public class Explosion : MonoBehaviour
     {
         isHit = false;
         /////////////////////////////////////////////////////
-        wasd.GetComponent<WASD>().enabled = true;////////////
+        wasd.GetComponent<PlayerTransVelocity>().enabled = true;////////////
         /////////////////////////////////////////////////////
 
     }
@@ -49,7 +49,7 @@ public class Explosion : MonoBehaviour
 
 
             /////////////////////////////////////////////////////
-            wasd.GetComponent<WASD>().enabled = false;///////////
+            wasd.GetComponent<PlayerTransVelocity>().enabled = false;///////////
             /////////////////////////////////////////////////////
 
         }
