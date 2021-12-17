@@ -32,12 +32,12 @@ public class UIStatusBar : MonoBehaviour
         switch (statusType)
         {
             case STATUS_TYPE.HP:
-                slider.maxValue = status.GetMaxHp();
-                slider.value = status.GetHp();
+                slider.maxValue = status.MaxHp;
+                slider.value = status.Hp;
                 break;
             case STATUS_TYPE.STAMINA:
-                slider.maxValue = status.GetMaxStamina();
-                slider.value = status.GetStamina();
+                slider.maxValue = status.MaxStamina;
+                slider.value = status.Stamina;
                 break;
             default:
                 break;
