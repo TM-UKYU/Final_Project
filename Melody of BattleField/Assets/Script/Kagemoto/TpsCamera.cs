@@ -14,7 +14,7 @@ using UnityEngine;
 public class TpsCamera : MonoBehaviour
 {
     // 入力値(Inspectorで設定)
-    [SerializeField] Transform Player;  // 追従対象
+    private GameObject Player;  // 追従対象
     [SerializeField] float RotateSpeed; // 回転速度
 
     float side, forward;
@@ -23,12 +23,26 @@ public class TpsCamera : MonoBehaviour
     {
         // 回転速度
         RotateSpeed = 1;
+
+
+
+
+        //追従するオブジェクトを選択
+
+        //ギターをプレイヤーとして追従
+        Player = GameObject.Find("Guitar");
+
+        //ギターがインスタンス化されていなければキーボードに追従
+        if (Player == null) 
+        {
+            Player = GameObject.Find("Keyboard");
+        }
     }
 
     void Update()
     {
         // プレイヤー位置を追従する
-        transform.position = new Vector3(Player.position.x, transform.position.y, Player.position.z);
+        transform.position = new Vector3(Player.transform.position.x, transform.position.y, Player.transform.position.z);
 
         // マウスによる回転
         side += Input.GetAxis("Mouse X") * RotateSpeed; // 横回転入力

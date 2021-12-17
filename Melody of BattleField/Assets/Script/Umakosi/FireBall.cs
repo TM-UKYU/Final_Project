@@ -22,7 +22,15 @@ public class FireBall : MonoBehaviour
     {
         enemy = GameObject.Find("FireBallPoint");
         explosion = GameObject.Find("enemy");
-        player = GameObject.Find("Player");
+
+        //ギターをプレイヤーとして追従
+        player = GameObject.Find("Guitar");
+
+        //ギターがインスタンス化されていなければキーボードに追従
+        if (player == null)
+        {
+            player = GameObject.Find("Keyboard");
+        }
     }
 
     // Update is called once per frame

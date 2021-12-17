@@ -100,7 +100,16 @@ public class DragonEnemyMove : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         prowling = GameObject.Find("enemy");
         anim = GameObject.Find("enemy");
-        p = GameObject.Find("Player");
+
+        //ギターをプレイヤーとして格納
+        p = GameObject.Find("Guitar");
+
+        //ギターがインスタンス化されていなければキーボードを格納
+        if (p == null)
+        {
+            p = GameObject.Find("Keyboard");
+        }
+
         bullet = GameObject.Find("FireBallPoint");
         Sphere = GameObject.Find("Sphere");
 

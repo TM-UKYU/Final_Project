@@ -32,7 +32,7 @@ public class EnemyCommon : MonoBehaviour
     }
 
     //ダメージを食らった時HPの計算
-    private void DecHP(float Damage)
+    public void DecHP(float Damage)
     {
         //HPを減らす
         HitPoint -= Damage;

@@ -42,7 +42,7 @@ public class PlayerTransVelocity : MonoBehaviour
     [SerializeField] private float applySpeed = 0.1f;
 
     // カメラ参照用変数(Inspectorで参照するカメラを指定する)
-    [SerializeField] private TpsCamera refCamera;
+    private TpsCamera refCamera;
     [SerializeField] private Vector3 transforward;
    
 
@@ -50,6 +50,10 @@ public class PlayerTransVelocity : MonoBehaviour
     {
         // Rigitbodyの取得
         rbody = GetComponent<Rigidbody>();
+
+        //TpsCameraの取得
+        GameObject obj = GameObject.Find("TpsCamera");
+        refCamera = obj.GetComponent<TpsCamera>();
     }
 
     void Update()

@@ -5,6 +5,7 @@ using UnityEngine;
 public class ParticleScript : MonoBehaviour
 {
     //private CrabScript crabScript;
+    private GameObject grandObject;
     //パーティクルシステム
     private ParticleSystem ps;
     //ScaleUp用の経過時間
@@ -20,6 +21,11 @@ public class ParticleScript : MonoBehaviour
     //パーティクルを削除するまでの時間
     [SerializeField]
     private float deleteTime = 5f;
+    //元のパーティクルの透明度
+    private float alphaValue = 1f;
+    //パーティクルの当たった時のダメージ
+    [SerializeField]
+    private float Damage = 30;
 
     // Start is called before the first frame update
     void Start()
@@ -36,17 +42,50 @@ public class ParticleScript : MonoBehaviour
         elapsedDeleteTime += Time.deltaTime;
         elapsedScaleUpTime += Time.deltaTime;
 
-        if(elapsedDeleteTime>=deleteTime)
+        if (elapsedDeleteTime >= deleteTime)
         {
             Destroy(gameObject);
         }
 
-        if(elapsedScaleUpTime>scaleUpTime)
+        if (elapsedScaleUpTime > scaleUpTime)
         {
             transform.localScale += new Vector3(scaleUpParam, scaleUpParam, scaleUpParam);
             elapsedScaleUpTime = 0f;
-        }
 
+            if (ps != null)
+            {
+                //パーティクルを段々と透けさせる処理
+                List<ParticleSystem.Particle> outside = new List<ParticleSystem.Particle>();
+
+                int numOutside = ps.GetTriggerParticles(ParticleSystemTriggerEventType.Outside, outside);
+
+                alphaValue -= (1f / deleteTime) * Time.deltaTime;
+
+                alphaValue = (alphaValue <= 0f) ? 0f : alphaValue;
+
+                for (int i = 0; i < numOutside; i++)
+                {
+                    ParticleSystem.Particle p = outside[i];
+                    p.startColor = new Color(1f, 1f, 1f, alphaValue);
+                    outside[i] = p;
+                }
+
+                //パーティクルデータの設定
+                ps.SetTriggerParticles(ParticleSystemTriggerEventType.Outside, outside);
+            }
+
+        }
+    }
+
+    //パーティクルの当たり判定
+    private void OnParticleCollision(GameObject other)
+    {
+        if(other.gameObject.tag=="Enemy")
+        {
+            //敵にパーティクルが当たった時の処理
+            //今なら当たったらダメージ
+            other.gameObject.GetComponent<EnemyCommon>().DecHP(Damage);
+        }
     }
 
     private void OnParticleTrigger()
