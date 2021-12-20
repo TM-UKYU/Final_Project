@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 7984765352745757762}
   - component: {fileID: 7984765352745757761}
   - component: {fileID: 8606835693685553328}
+  - component: {fileID: 7947933438933194278}
   m_Layer: 0
   m_Name: Keyboard
   m_TagString: Player
@@ -376,6 +377,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wasd: {fileID: 7984765352745757760}
   futtobi: 0
+--- !u!114 &7947933438933194278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7984765352745757760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ed7a6853ae2f94e8a0a9d0fc6c8ef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7984765352836900224
 GameObject:
   m_ObjectHideFlags: 0
