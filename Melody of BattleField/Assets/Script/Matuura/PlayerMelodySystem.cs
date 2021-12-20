@@ -45,10 +45,10 @@ public class PlayerMelodySystem : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Return))
         {
-            if(MelodyList.Count<2)
+            if (MelodyList.Count < 2)
             {
                 Debug.Log("‰r¥‚ª‘«‚è‚Ü‚¹‚ñ");
-                return;
+                MelodyList.Clear();
             }
             if (MelodyList[0] == Spell.Deel)
             {
@@ -72,7 +72,7 @@ public class PlayerMelodySystem : MonoBehaviour
             {
                 Debug.Log("•—‚Ì–‚–@");
             }
-            MelodyList.Clear();
+            
         }
     }
 }
