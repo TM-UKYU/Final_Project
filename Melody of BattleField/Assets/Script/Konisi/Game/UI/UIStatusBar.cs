@@ -14,6 +14,8 @@ public class UIStatusBar : MonoBehaviour
 
     // 動かすバー
     public Slider slider;
+    // プレイヤーオブジェクト
+    private GameObject playerObject;
     // プレイヤー
     public Player player;
     // ステータス情報
@@ -22,6 +24,8 @@ public class UIStatusBar : MonoBehaviour
 
     void Start()
     {
+        playerObject = GameObject.Find("Keyboard");
+        player = playerObject.GetComponent<Player>();
         // プレイヤーの中のステータス情報を取得
         status = player.GetComponent<PlayerStatus>();
     }
