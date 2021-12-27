@@ -24,18 +24,12 @@ public class TpsCamera : MonoBehaviour
         // 回転速度
         RotateSpeed = 1;
 
-
-
-
-        //追従するオブジェクトを選択
-
-        //ギターをプレイヤーとして追従
-        Player = GameObject.Find("Guitar");
-
-        //ギターがインスタンス化されていなければキーボードに追従
-        if (Player == null) 
+        // 武器によって変更
+        switch (StageInformation.Weapon)
         {
-            Player = GameObject.Find("Keyboard");
+            case StageInformation.WEAPON_ID.KEYBOARD: Player = GameObject.Find("Keyboard"); break;
+            case StageInformation.WEAPON_ID.GUITAR: Player = GameObject.Find("Guitar"); break;
+            default: break;
         }
     }
 

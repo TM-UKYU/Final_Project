@@ -24,7 +24,14 @@ public class UIStatusBar : MonoBehaviour
 
     void Start()
     {
-        playerObject = GameObject.Find("Keyboard");
+        // 武器によって変更
+        switch(StageInformation.Weapon)
+        {
+            case StageInformation.WEAPON_ID.KEYBOARD: playerObject = GameObject.Find("Keyboard"); break;
+            case StageInformation.WEAPON_ID.GUITAR: playerObject = GameObject.Find("Guitar"); break;
+            default: break;
+        }
+        
         player = playerObject.GetComponent<Player>();
         // プレイヤーの中のステータス情報を取得
         status = player.GetComponent<PlayerStatus>();
