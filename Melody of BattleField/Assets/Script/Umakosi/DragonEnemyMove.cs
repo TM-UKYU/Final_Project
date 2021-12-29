@@ -15,7 +15,6 @@ public class DragonEnemyMove : MonoBehaviour
     private Vector3 latestPos;
 
     public bool isFly;
-    private bool isTukiage;
 
     private bool longAttackFlg;  //遠距離攻撃に入るフラグ(ヒエラルキー内のSearchAreaに入ったらtrue)
     private bool shortAttackFlg; //近距離攻撃に入るフラグ(ヒエラルキー内のAttackに入ったらtrue)
@@ -23,7 +22,6 @@ public class DragonEnemyMove : MonoBehaviour
 
     private Rigidbody rb;        //  Rigidbodyを使うための変数
 
-    private bool isGround;       //  地面に着地しているか判定する変数
 
     public float weight;         //ジャンプ攻撃の頻度(600フレームに一回行う)
 
@@ -31,8 +29,13 @@ public class DragonEnemyMove : MonoBehaviour
     private int fireBallNum;
     private bool fireBallFlg;
     private bool finishFireBall;
+    private bool isShotBomb;
+    private bool isGround;       //  地面に着地しているか判定する変数
 
     private float coolTime;
+
+    private int actionPattern;
+
 
     //スクリプト取得/////////////////
     private GameObject prowling;
@@ -40,6 +43,7 @@ public class DragonEnemyMove : MonoBehaviour
     private GameObject p;
     private GameObject bullet;
     private GameObject Sphere;
+    private GameObject bomb;
     /// //////////////////////////////
 
     public enum Hp_State
@@ -92,26 +96,21 @@ public class DragonEnemyMove : MonoBehaviour
     private void Start()
     {
         power = 10;
+
         fireBallFlg = false;
         finishFireBall = false;
         longAttackFlg = false;
         shortAttackFlg = false;
-        isTukiage = false;
+        isShotBomb = false;
+
         rb = GetComponent<Rigidbody>();
+
         prowling = GameObject.Find("enemy");
         anim = GameObject.Find("enemy");
-
-        //ギターをプレイヤーとして格納
-        p = GameObject.Find("Guitar");
-
-        //ギターがインスタンス化されていなければキーボードを格納
-        if (p == null)
-        {
-            p = GameObject.Find("Keyboard");
-        }
-
+        p = GameObject.Find("Keyboard");
         bullet = GameObject.Find("FireBallPoint");
         Sphere = GameObject.Find("Sphere");
+        bomb = GameObject.Find("BombPoint");
 
         if (Random.Range(1, 10) == 1)
         {
@@ -128,6 +127,8 @@ public class DragonEnemyMove : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("にっこり");
+
         player = p.transform.position;
 
         if (hp < 0)
@@ -225,6 +226,21 @@ public class DragonEnemyMove : MonoBehaviour
             nextNum = Action_State.Action_FlyTackle;
             coolTime = 800;
         }
+
+        if (Input.GetKey(KeyCode.K))
+        {
+            hp_State = Hp_State.Hp_Low;
+        }
+
+        if (!isShotBomb)
+        {
+            HpCheck();
+        }
+
+        if (!longAttackFlg)
+        {
+            actionPattern = Random.Range(1, 4);
+        }
     }
 
     public bool CoolTime(float Time, Action_State nextState)
@@ -252,6 +268,14 @@ public class DragonEnemyMove : MonoBehaviour
         Debug.Log("アニメーションイベント:発射ああああああああああああ");
         fireBallNum++;
         fireBallFlg = true;
+    }
+    private void HpCheck()
+    {
+        if (hp_State == Hp_State.Hp_Low)
+        {
+            bomb.GetComponent<Bomb>().FireBombs();
+            isShotBomb = true;
+        }
     }
 
     private void Wait()
@@ -440,7 +464,6 @@ public class DragonEnemyMove : MonoBehaviour
 
     private void abc()
     {
-        isTukiage = true;
         Vector3 direction = this.transform.up;
         this.GetComponent<Rigidbody>().AddForce(direction * 25, ForceMode.Impulse);
     }
@@ -577,14 +600,31 @@ public class DragonEnemyMove : MonoBehaviour
             if (!CoolTime(coolTime, nextNum)) { return; }
 
             Debug.Log("当たってます" + collider.tag);
-            if (weight < 600)
+
+            switch (actionPattern)
             {
-                action_State = Action_State.Action_Chase;
+                case 1:
+                    action_State = Action_State.Action_Chase;
+                    break;
+
+                case 2:
+                    action_State = Action_State.Action_FireBall;
+                    break;
+
+                case 3:
+                    action_State = Action_State.Action_TakeOff;
+
+                    nextNum = Action_State.Action_FlyTackle;
+                    coolTime = 800; break;
             }
-            else
-            {
-                action_State = Action_State.Action_FireBall;
-            }
+            //if (weight < 600)
+            //{
+            //    action_State = Action_State.Action_Chase;
+            //}
+            //else
+            //{
+            //    action_State = Action_State.Action_FireBall;
+            //}
 
             //if (weight>600)
             //{

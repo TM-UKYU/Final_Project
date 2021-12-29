@@ -13,11 +13,14 @@ public class Bomb : MonoBehaviour
 
     private GameObject explosion;
 
+    private bool isBomb;
+
     // Start is called before the first frame update
     void Start()
     {
         enemy = GameObject.Find("BombPoint"); 
         explosion = GameObject.Find("enemy");
+        isBomb = true;
     }
 
     // Update is called once per frame
@@ -25,10 +28,19 @@ public class Bomb : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            for (int i = 0; i <= 6; i++)
-            {
-                StartCoroutine(Bombs(i));
-            }
+            FireBombs();
+        }
+    }
+
+    public void FireBombs()
+    {
+        if (!isBomb) { return; }
+
+        isBomb = false;
+
+        for (int i = 0; i <= 6; i++)
+        {
+            StartCoroutine(Bombs(i));
         }
     }
 
