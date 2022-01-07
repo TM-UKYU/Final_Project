@@ -14,6 +14,12 @@ public class ActiveSet : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        // アタッチ先のボタンを取得
+        Button button = GetComponent<Button>();
+
+        // 選択不可の場合
+        if (!button.interactable) { return; }
+
         //メロディのオブジェクト表示
         MelodyObject.gameObject.SetActive(true);
         MelodyObject.transform.position = this.transform.position;
@@ -23,6 +29,14 @@ public class ActiveSet : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     }
 
     public void OnPointerExit(PointerEventData eventData)
+    {
+        //メロディのオブジェクト非表示
+        MelodyObject.gameObject.SetActive(false);
+
+        Destroy(Instance);
+    }
+
+    public void OnClick()
     {
         //メロディのオブジェクト非表示
         MelodyObject.gameObject.SetActive(false);

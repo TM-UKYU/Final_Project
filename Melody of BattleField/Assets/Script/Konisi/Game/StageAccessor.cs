@@ -26,7 +26,7 @@ public class StageAccessor : MonoBehaviour
         StageInformation.Weapon = StageInformation.WEAPON_ID.KEYBOARD;
     }
 
-    public void SetGuitar()
+    public void SetGuitarWeapon()
     {
         StageInformation.Weapon = StageInformation.WEAPON_ID.GUITAR;
     }
