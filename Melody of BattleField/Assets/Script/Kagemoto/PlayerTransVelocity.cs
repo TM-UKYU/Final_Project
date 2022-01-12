@@ -30,6 +30,7 @@ public class PlayerTransVelocity : MonoBehaviour
     private int offJumpClock = 0; // 最高速時間のカウンタ
 
     private bool IsStep; // ステップ中かどうか
+    private bool IsDash;
     private float time;
 
     // レイ
@@ -88,14 +89,24 @@ public class PlayerTransVelocity : MonoBehaviour
         }
 
         // カメラの方向に回転
-        //transform.eulerAngles = refCamera.transform.eulerAngles;
-        if (Input.GetKeyDown("left shift"))
+        transform.eulerAngles = refCamera.transform.eulerAngles;
+        if (Input.GetKey("left shift"))
+        {
+            IsDash = true;
+        }
+        else
+        {
+            IsDash = false;
+        }
+
+        if (Input.GetKeyDown("left ctrl"))
         {
             IsStep = true;
         }
         
         if (IsStep)
         {
+            this.GetComponent<CapsuleCollider>().enabled = false;
             speed = 30.0f;
            
             time+= Time.deltaTime;
@@ -105,7 +116,10 @@ public class PlayerTransVelocity : MonoBehaviour
         }
         else
         {
+            this.GetComponent<CapsuleCollider>().enabled = true;
             speed = 5.0f;
+
+            if (IsDash) { speed = 15.0f; }
             time = 0.0f;
         }
       
@@ -123,48 +137,48 @@ public class PlayerTransVelocity : MonoBehaviour
         move = cameraForward * moveZ + cameraRight * moveX;
 
         // レイの地面判定
-        rayPosition = transform.position + new Vector3(0.0f, 0.5f, 0.0f); // レイの長さ分プレイヤ-座標から浮かせる
+        rayPosition = transform.position + new Vector3(0.0f, -1.7f, 0.0f); // レイの長さ分プレイヤ-座標から浮かせる
         ray = new Ray(rayPosition, transform.up * -1); //レイを下に発射
-        Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.red); //レイを赤色表示
+        Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.green); //レイを赤色表示
 
-        //if (Physics.Raycast(ray, out hit, rayDistance)) // レイが当たった時の処理
-        //{
-        //    IsGround = true; // 地面に触れたことにする
+        if (Physics.Raycast(ray, out hit, rayDistance)) // レイが当たった時の処理
+        {
+            IsGround = true; // 地面に触れたことにする
 
-        //}
-        //else
-        //{
-        //    IsGround = false; // 地面に触れてないことにする
+        }
+        else
+        {
+            IsGround = false; // 地面に触れてないことにする
 
-        //}
-        //// 地面に触れていたら
-        //if (IsGround)
-        //{
-        //    // ジャンプ変数関連
-        //    {
-        //        maxJumpFlag = false;
-        //        moveY = 1.0f;
-        //        offJumpClock = 0;
-        //        isJump = false;
-        //    }
+        }
+        // 地面に触れていたら
+        if (IsGround)
+        {
+            // ジャンプ変数関連
+            {
+                maxJumpFlag = false;
+                moveY = 1.0f;
+                offJumpClock = 0;
+                isJump = false;
+            }
 
-        //    rbody.useGravity = false; //　重力をオフ
-        //    // ジャンプ
-        //    if (Input.GetKey(KeyCode.Space))
-        //    {
-        //        isJump = true;
-        //        IsGround = false;// 地面判定オフ
-        //    }
-        //}
-        //else
-        //{
-        //    // 接地なし&ジャンプ中ではない
-        //    if (!isJump)
-        //    {
-        //        // 重力をオン
-        //        rbody.useGravity = true;
-        //    }
-        //}
+            rbody.useGravity = false; //　重力をオフ
+            // ジャンプ
+            if (Input.GetKey(KeyCode.Space))
+            {
+                isJump = true;
+                IsGround = false;// 地面判定オフ
+            }
+        }
+        else
+        {
+            // 接地なし&ジャンプ中ではない
+            if (!isJump)
+            {
+                // 重力をオン
+                rbody.useGravity = true;
+            }
+        }
 
         // ジャンプフラグ
         if (isJump) { Jump(); }
