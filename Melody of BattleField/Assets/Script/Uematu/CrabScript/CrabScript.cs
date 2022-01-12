@@ -72,13 +72,21 @@ public class CrabScript : MonoBehaviour
         animator = GetComponent<Animator>();
         defaltPos = transform.position;
         SetRandomDestination();
+
+        //最初止める
+        GetComponent<CrabScript>().enabled = false;
+
+        StartCoroutine("Pouse");
+
+       
+
     }
 
     // Update is called once per frame
     void Update()
-    {
+    { 
         //カニの状態によって処理を変える
-        if(crabState==CrabState.idle)
+        if (crabState==CrabState.idle)
         {
             Idle();
         }
@@ -329,5 +337,15 @@ public class CrabScript : MonoBehaviour
     public void SetIsBreath(bool flg)
     {
         IsBreath = flg;
+    }
+
+    //一時停止
+    private IEnumerator Pouse() //コルーチン関数の名前
+    {
+        //コルーチンの内容
+        Debug.Log("スタート");
+        yield return new WaitForSeconds(10.0f);
+        Debug.Log("10秒後");
+        GetComponent<CrabScript>().enabled = true;
     }
 }
