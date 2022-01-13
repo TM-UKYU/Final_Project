@@ -545,11 +545,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 3b1e6a890d4998745bbfdab62e005cc6, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1221,6 +1221,32 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1449243225 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7129991724391371831, guid: b19598723ea946643a57add24162220f, type: 3}
+  m_PrefabInstance: {fileID: 2122043021}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1449243226
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1449243225}
+  serializedVersion: 2
+  m_Mass: 10
+  m_Drag: 1
+  m_AngularDrag: 5
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!64 &1449243227 stripped
+MeshCollider:
+  m_CorrespondingSourceObject: {fileID: 7129991724391371828, guid: b19598723ea946643a57add24162220f, type: 3}
+  m_PrefabInstance: {fileID: 2122043021}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1501730659
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2102,7 +2128,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1985464785
@@ -2179,10 +2205,18 @@ PrefabInstance:
       propertyPath: characterController
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3410338106913011282, guid: b19598723ea946643a57add24162220f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5353937788557399842, guid: b19598723ea946643a57add24162220f, type: 3}
       propertyPath: characterController
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5481429411261540727, guid: b19598723ea946643a57add24162220f, type: 3}
+      propertyPath: cameraChange
+      value: 
+      objectReference: {fileID: 1640833238}
     - target: {fileID: 5481429411261540727, guid: b19598723ea946643a57add24162220f, type: 3}
       propertyPath: soundManager
       value: 
@@ -2254,15 +2288,10 @@ PrefabInstance:
     - target: {fileID: 7659402314550325565, guid: b19598723ea946643a57add24162220f, type: 3}
       propertyPath: HitCollider
       value: 
-      objectReference: {fileID: 2122043022}
+      objectReference: {fileID: 1449243227}
     - target: {fileID: 8883621157797822581, guid: b19598723ea946643a57add24162220f, type: 3}
       propertyPath: characterController
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b19598723ea946643a57add24162220f, type: 3}
---- !u!143 &2122043022 stripped
-CharacterController:
-  m_CorrespondingSourceObject: {fileID: 3410338106913011282, guid: b19598723ea946643a57add24162220f, type: 3}
-  m_PrefabInstance: {fileID: 2122043021}
-  m_PrefabAsset: {fileID: 0}

@@ -63,6 +63,8 @@ public class CrabScript : MonoBehaviour
     public AudioClip bubbleSound;
     //敵の共通処理
     public EnemyCommon enemyCommon;
+    //カメラ変更用のオブジェクト
+    public CameraChange cameraChange;
 
     // Start is called before the first frame update
     void Start()
@@ -347,5 +349,7 @@ public class CrabScript : MonoBehaviour
         yield return new WaitForSeconds(10.0f);
         Debug.Log("10秒後");
         GetComponent<CrabScript>().enabled = true;
+        if(cameraChange==null){ yield return new WaitForSeconds(0.0f); }
+        cameraChange.ChangeCamera();
     }
 }

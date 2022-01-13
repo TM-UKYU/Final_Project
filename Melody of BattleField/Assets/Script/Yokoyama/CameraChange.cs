@@ -28,4 +28,11 @@ public class CameraChange : MonoBehaviour
         }
      
     }
+
+    public void ChangeCamera()
+    {
+        //サブカメラをアクティブに設定
+        mainCamera.SetActive(true);
+        subCamera.SetActive(false);
+    }
 }
