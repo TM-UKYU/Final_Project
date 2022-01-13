@@ -93,6 +93,9 @@ public class DragonEnemyMove : MonoBehaviour
     // 円運動周期
     [SerializeField] private float period = 2;
 
+    //カメラ変更用のオブジェクト
+    public CameraChange cameraChange;
+
     private void Start()
     {
         power = 10;
@@ -123,6 +126,11 @@ public class DragonEnemyMove : MonoBehaviour
         hp_State = Hp_State.Hp_Energetic;
 
         countDown = 2;
+
+        //最初止める
+        GetComponent<CrabScript>().enabled = false;
+
+        StartCoroutine("Pouse");
     }
 
     private void Update()
@@ -675,5 +683,16 @@ public class DragonEnemyMove : MonoBehaviour
         }
         return false;
 
+    }
+
+    private IEnumerator Pouse() //コルーチン関数の名前
+    {
+        //コルーチンの内容
+        Debug.Log("スタート");
+        yield return new WaitForSeconds(10.0f);
+        Debug.Log("10秒後");
+        GetComponent<CrabScript>().enabled = true;
+        if (cameraChange == null) { yield return new WaitForSeconds(0.0f); }
+        cameraChange.ChangeCamera();
     }
 }
