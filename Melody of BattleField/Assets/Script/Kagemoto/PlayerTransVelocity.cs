@@ -14,6 +14,8 @@ public class PlayerTransVelocity : MonoBehaviour
 {
     private Rigidbody rbody;
 
+    public float rayMoveY = 0.0f;
+
     // 移動速度
     private float speed = 5.0f;
 
@@ -49,6 +51,8 @@ public class PlayerTransVelocity : MonoBehaviour
 
     void Start()
     {
+        rayMoveY = 0.5f;
+
         // Rigitbodyの取得
         rbody = GetComponent<Rigidbody>();
 
@@ -137,9 +141,9 @@ public class PlayerTransVelocity : MonoBehaviour
         move = cameraForward * moveZ + cameraRight * moveX;
 
         // レイの地面判定
-        rayPosition = transform.position + new Vector3(0.0f, -1.7f, 0.0f); // レイの長さ分プレイヤ-座標から浮かせる
+        rayPosition = transform.position + new Vector3(0.0f, rayMoveY, 0.0f); // レイの長さ分プレイヤ-座標から浮かせる
         ray = new Ray(rayPosition, transform.up * -1); //レイを下に発射
-        Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.green); //レイを赤色表示
+        Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.blue); //レイを赤色表示
 
         if (Physics.Raycast(ray, out hit, rayDistance)) // レイが当たった時の処理
         {
