@@ -561,7 +561,7 @@ PrefabInstance:
     - target: {fileID: 8080282251943135440, guid: 7cb39cbc66461194e924685d49cb3bd1, type: 3}
       propertyPath: MonstarObject
       value: 
-      objectReference: {fileID: 7747782199481834597, guid: 220e61151a293ec42b4a1b3ed58531a5, type: 3}
+      objectReference: {fileID: 2951909687065979512, guid: 8ceb32a2519b2d247a4bdb69ae37599b, type: 3}
     - target: {fileID: 8080282251943135443, guid: 7cb39cbc66461194e924685d49cb3bd1, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -653,7 +653,7 @@ PrefabInstance:
     - target: {fileID: 8080282251943135444, guid: 7cb39cbc66461194e924685d49cb3bd1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 8300000, guid: d56a079aacc41d2419cf6e2cfb5b42c1, type: 3}
+      objectReference: {fileID: 8300000, guid: ed13492d8de11b54c9f2ae078a54ec9b, type: 3}
     - target: {fileID: 8080282251943135444, guid: 7cb39cbc66461194e924685d49cb3bd1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[5].m_Arguments.m_ObjectArgument
       value: 
@@ -849,7 +849,7 @@ PrefabInstance:
     - target: {fileID: 8080282252452557216, guid: 7cb39cbc66461194e924685d49cb3bd1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[4].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 8300000, guid: edc2e92e89309854e813502bea189da0, type: 3}
+      objectReference: {fileID: 8300000, guid: ed13492d8de11b54c9f2ae078a54ec9b, type: 3}
     - target: {fileID: 8080282252452557216, guid: 7cb39cbc66461194e924685d49cb3bd1, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
@@ -869,7 +869,7 @@ PrefabInstance:
     - target: {fileID: 8080282252452557276, guid: 7cb39cbc66461194e924685d49cb3bd1, type: 3}
       propertyPath: MonstarObject
       value: 
-      objectReference: {fileID: 4017206747848785283, guid: cad6b6833c62f8443bcb23281b14a6cb, type: 3}
+      objectReference: {fileID: 7798228479306350093, guid: cad6b6833c62f8443bcb23281b14a6cb, type: 3}
     - target: {fileID: 8080282252452557279, guid: 7cb39cbc66461194e924685d49cb3bd1, type: 3}
       propertyPath: m_Sprite
       value: 
