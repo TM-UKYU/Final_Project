@@ -1139,8 +1139,10 @@ MonoBehaviour:
   prefabNote: {fileID: 7486094925405741528, guid: 51806340abb99eb4fb46fe967f08c91d, type: 3}
   prefabString: {fileID: 2358296314974691776, guid: 18a88d305c3cd7e43ac7a8ef61585f69, type: 3}
   PrefabColEffect: {fileID: 613608268062933142, guid: d019acdeacdd6274da6e747b55a16279, type: 3}
-  noteSE: {fileID: 8300000, guid: b9ea5af7f3ae420408ee1a343e270858, type: 3}
-  stringSE: {fileID: 8300000, guid: 38f45dc905eb4c946ab76160830abbf1, type: 3}
+  noteSE: {fileID: 8300000, guid: 17c3c4c97ea7bc7468e08b0640928ee5, type: 3}
+  noteSE2: {fileID: 8300000, guid: c528669fd9205f64fb06000c6b563961, type: 3}
+  noteSE3: {fileID: 8300000, guid: adb5f50ab9f4bb4439efa6acdeaa33ff, type: 3}
+  stringSE: {fileID: 8300000, guid: 5654708d97b01d642ab1ea2c49c8d2b7, type: 3}
   resetFlg: 1
   betweenTime: 0
   shootPower: 0
