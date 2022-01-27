@@ -2980,10 +2980,48 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 6158926917161199483}
   m_Mesh: {fileID: 1499903664688953481, guid: 84036b017b309dc4091a0ae0f36c87e2, type: 3}
 --- !u!23 &7733244335406290778
 MeshRenderer:
+=======
+  m_GameObject: {fileID: 3989428557274984326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ecf61b2ff372c74fb7d908544acc053, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Master: {fileID: 3989428557274984326}
+  prefabNote: {fileID: 7486094925405741528, guid: 51806340abb99eb4fb46fe967f08c91d, type: 3}
+  prefabString: {fileID: 2358296314974691776, guid: 18a88d305c3cd7e43ac7a8ef61585f69, type: 3}
+  PrefabColEffect: {fileID: 613608268062933142, guid: d019acdeacdd6274da6e747b55a16279, type: 3}
+  noteSE: {fileID: 8300000, guid: 17c3c4c97ea7bc7468e08b0640928ee5, type: 3}
+  noteSE2: {fileID: 8300000, guid: c528669fd9205f64fb06000c6b563961, type: 3}
+  noteSE3: {fileID: 8300000, guid: adb5f50ab9f4bb4439efa6acdeaa33ff, type: 3}
+  stringSE: {fileID: 8300000, guid: 5654708d97b01d642ab1ea2c49c8d2b7, type: 3}
+  resetFlg: 1
+  betweenTime: 0
+  shootPower: 0
+  raiseY: 1
+  moveZ: 1
+  waveSpanTime: 0
+  waveSpanFar: 0
+  GapFromOrigin: {x: 0, y: 0, z: 0}
+  waveNumMax: 0
+  shot1: {fileID: 0}
+  shot2: {fileID: 0}
+  Setshot1: {fileID: 0}
+  Setshot2: {fileID: 0}
+  stringObj: {fileID: 0}
+  pos1: {x: 0, y: 0, z: 0}
+  pos2: {x: 0, y: 0, z: 0}
+  temp: {x: 0, y: 0, z: 0}
+  normal: {x: 0, y: 0, z: 0}
+  stringRot: {x: 0, y: 0, z: 0}
+--- !u!136 &7682334503860695079
+CapsuleCollider:
+>>>>>>> 357ff95d51bfee224d9ece4d5a03c782725fe594
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}

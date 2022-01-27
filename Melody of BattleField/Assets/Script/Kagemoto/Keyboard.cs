@@ -10,6 +10,10 @@ public class Keyboard : MonoBehaviour
     [SerializeField] private GameObject prefabString; // 弦
     [SerializeField] private GameObject PrefabColEffect; // 衝突エフェクト
     [SerializeField] private AudioClip noteSE;        // 音符SE
+    [SerializeField] private AudioClip noteSE2;        // 音符SE
+    [SerializeField] private AudioClip noteSE3;        // 音符SE
+
+    private int CountSE;
     [SerializeField] private AudioClip stringSE;     // 弦SE
     AudioSource audioSource;
 
@@ -53,6 +57,8 @@ public class Keyboard : MonoBehaviour
 
     void Start()
     {
+        CountSE = 1;
+
         //オーディオソースを取得
         audioSource = GetComponent<AudioSource>();
 
@@ -287,7 +293,12 @@ public class Keyboard : MonoBehaviour
         // Vキーが離されたら
         if (Input.GetKeyUp(KeyCode.V))
         {
-            audioSource.PlayOneShot(noteSE);
+            switch (CountSE) {
+                case 1: audioSource.PlayOneShot(noteSE);CountSE++; break;
+                case 2: audioSource.PlayOneShot(noteSE2); CountSE++; break;
+                case 3: audioSource.PlayOneShot(noteSE3); CountSE++; break;
+                default:break;
+            };
 
             GameObject noteObj = Instantiate(
                 prefabNote,// インスタンス化するプレハブ

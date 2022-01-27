@@ -14,6 +14,8 @@ public class PlayerTransVelocity : MonoBehaviour
 {
     private Rigidbody rbody;
 
+    public BakeMesh bakemesh;
+
     public float rayMoveY = 0.0f;
 
     // 移動速度
@@ -51,6 +53,8 @@ public class PlayerTransVelocity : MonoBehaviour
 
     void Start()
     {
+
+        bakemesh = GetComponent<BakeMesh>();
         rayMoveY = 0.5f;
 
         // Rigitbodyの取得
@@ -112,11 +116,13 @@ public class PlayerTransVelocity : MonoBehaviour
         {
             this.GetComponent<CapsuleCollider>().enabled = false;
             speed = 30.0f;
-           
-            time+= Time.deltaTime;
+            bakemesh.isBake = true;
+
+            time += Time.deltaTime;
             if (time > 0.5f) {
                 IsStep = false;
             }
+           
         }
         else
         {
@@ -125,6 +131,7 @@ public class PlayerTransVelocity : MonoBehaviour
 
             if (IsDash) { speed = 15.0f; }
             time = 0.0f;
+            bakemesh.isBake = false;
         }
       
         
