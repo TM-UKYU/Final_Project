@@ -8,6 +8,7 @@ TagManager:
   - FireBall
   - Ground
   - Button
+  - Bullet
   layers:
   - Default
   - TransparentFX

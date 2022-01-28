@@ -66,6 +66,9 @@ public class CrabScript : MonoBehaviour
     //カメラ変更用のオブジェクト
     public CameraChange cameraChange;
 
+
+    private GameObject effect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -80,7 +83,8 @@ public class CrabScript : MonoBehaviour
 
         StartCoroutine("Pouse");
 
-       
+        effect = GameObject.Find("crab-monster");
+
 
     }
 
@@ -351,5 +355,23 @@ public class CrabScript : MonoBehaviour
         GetComponent<CrabScript>().enabled = true;
         if(cameraChange==null){ yield return new WaitForSeconds(0.0f); }
         cameraChange.ChangeCamera();
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+
+        Debug.Log("着地");
+
+        if (other.gameObject.tag == "Bullet")
+        {
+            Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAいてぇ!" + other.gameObject.tag);
+            effect.GetComponent<SetEffects>().EffectUpdate(other.transform.position);
+            Invoke("EffectEnd", 1.0f);
+        }
+    }
+
+    void EffectEnd()
+    {
+        effect.GetComponent<SetEffects>().EffectEnd();
     }
 }

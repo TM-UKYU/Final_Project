@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1273965524123377181}
   - component: {fileID: 8639936403919294073}
   - component: {fileID: -8516409296724241574}
+  - component: {fileID: 7658103932145329962}
   m_Layer: 0
   m_Name: BreathBall
   m_TagString: FireBall
@@ -111,3 +112,19 @@ MonoBehaviour:
   MoveSpeed: 5
   AliveTime: 10
   characterController: {fileID: 0}
+  effect: {fileID: 7956300995472628712}
+--- !u!114 &7658103932145329962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7956300995472628712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92434ec8837cb154bbc0917daaada257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  follow: {fileID: 7956300995472628712}
+  effect: {fileID: 204008724312988681, guid: 68821bbc7b62e7f47b46b8c453dd16f4, type: 3}
+  isUpdate: 0

@@ -21,6 +21,9 @@ public class BreathBall : MonoBehaviour
     [SerializeField]
     private CharacterController characterController;
 
+    [SerializeField]
+    private GameObject effect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +32,8 @@ public class BreathBall : MonoBehaviour
         //各ステータス初期化
         ElapsedTime = 0;
         Destroy(gameObject, AliveTime);
+
+
     }
 
     // Update is called once per frame
@@ -37,6 +42,7 @@ public class BreathBall : MonoBehaviour
         //生きていれば前方向に前進
         transform.position += transform.forward * MoveSpeed * Time.deltaTime;
         ElapsedTime += Time.deltaTime;
+        effect.GetComponent<SetEffects>().EffectUpdate(this.transform.position);
     }
 
     private void OnCollisionEnter(Collision collision)
