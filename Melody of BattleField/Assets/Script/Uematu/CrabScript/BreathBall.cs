@@ -31,8 +31,7 @@ public class BreathBall : MonoBehaviour
         SpikeCollider = GetComponents<Collider>();
         //各ステータス初期化
         ElapsedTime = 0;
-        Destroy(gameObject, AliveTime);
-
+        Invoke("DestroyEffect", AliveTime);
 
     }
 
@@ -84,5 +83,12 @@ public class BreathBall : MonoBehaviour
         {
             Physics.IgnoreCollision(item, characterController, Flag);
         }
+    }
+
+    private void DestroyEffect()
+    {
+        effect.GetComponent<SetEffects>().EffectEnd();
+        Destroy(gameObject);
+
     }
 }
