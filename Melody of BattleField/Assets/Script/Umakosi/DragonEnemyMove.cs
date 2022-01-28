@@ -44,6 +44,7 @@ public class DragonEnemyMove : MonoBehaviour
     private GameObject bullet;
     private GameObject Sphere;
     private GameObject bomb;
+    private GameObject effect;
     /// //////////////////////////////
 
     public enum Hp_State
@@ -114,6 +115,7 @@ public class DragonEnemyMove : MonoBehaviour
         bullet = GameObject.Find("FireBallPoint");
         Sphere = GameObject.Find("Sphere");
         bomb = GameObject.Find("BombPoint");
+        effect = GameObject.Find("enemy");
 
         if (Random.Range(1, 10) == 1)
         {
@@ -658,6 +660,7 @@ public class DragonEnemyMove : MonoBehaviour
     }
     void OnCollisionStay(Collision other)//  ínñ Ç…êGÇÍÇΩéûÇÃèàóù
     {
+        Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAÇ¢ÇƒÇ•!");
 
         Debug.Log("íÖín");
 
@@ -667,8 +670,16 @@ public class DragonEnemyMove : MonoBehaviour
 
             isGround = true;//  GroundedÇtrueÇ…Ç∑ÇÈ
         }
+        if (other.gameObject.tag == "Player") { return; }
+        //if (other.gameObject.tag == "Untagged") { return; }
+        if (other.gameObject.tag == "Ground") { return; }
+        effect.GetComponent<SetEffects>().EffectUpdate(other.transform.position);
+        Invoke("EffectEnd",1.0f);
+    }
 
-
+    void EffectEnd()
+    {
+        effect.GetComponent<SetEffects>().EffectEnd();
     }
 
     private bool CompareTag(string tagName, Collider collider)

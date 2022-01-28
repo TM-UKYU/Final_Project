@@ -880,7 +880,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 345166274}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2387,7 +2387,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7984765354824551755, guid: cd53023dbfc8e324eafb85b406757487, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -52.1
+      value: -42.9
       objectReference: {fileID: 0}
     - target: {fileID: 7984765354824551755, guid: cd53023dbfc8e324eafb85b406757487, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2820,6 +2820,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effect: {fileID: 1121192042590650, guid: 399cc199a0eac444fbf62f79c084ee5a, type: 3}
+--- !u!114 &1516193301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1516193291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92434ec8837cb154bbc0917daaada257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  follow: {fileID: 1516193291}
+  effect: {fileID: 1570927096764274, guid: f326bf8b201c140418290c33512040ff, type: 3}
+  isUpdate: 0
 --- !u!4 &1528067606 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400048, guid: f14db21b5e70e3d4ab6f0e158099a341, type: 3}
