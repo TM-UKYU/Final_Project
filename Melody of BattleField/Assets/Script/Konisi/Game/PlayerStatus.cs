@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStatus : MonoBehaviour
 {
@@ -9,6 +10,14 @@ public class PlayerStatus : MonoBehaviour
     private int stamina = 100;
     private int maxStamina = 100;
     public StageInformation.WEAPON_ID Weapon = StageInformation.WEAPON_ID.KEYBOARD;
+
+    private void Update()
+    {
+        if(hp<=0)
+        {
+            SceneManager.LoadScene("TitleScene");
+        }
+    }
 
     public int Hp
     {
