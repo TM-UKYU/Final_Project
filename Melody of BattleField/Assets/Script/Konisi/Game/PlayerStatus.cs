@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
-    private int hp = 80;
+    private int hp = 100;
     private int maxHp = 100;
-    private int stamina = 30;
+    private int stamina = 100;
     private int maxStamina = 100;
     public StageInformation.WEAPON_ID Weapon = StageInformation.WEAPON_ID.KEYBOARD;
 

@@ -433,6 +433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35b2421ce16e3c249b049bdf06caed14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bakemesh: {fileID: 0}
   rayMoveY: 0
   applySpeed: 0.1
   transforward: {x: 0, y: 0, z: 0}

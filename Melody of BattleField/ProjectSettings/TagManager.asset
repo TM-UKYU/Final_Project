@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Button
   - Bullet
+  - weapon
   layers:
   - Default
   - TransparentFX

@@ -18,8 +18,8 @@ public class CreateDagger : MonoBehaviour
 
     //UŒ‚‚ğ‚·‚éƒL[
     public KeyCode AttackKey_1 = KeyCode.C;
-    public KeyCode AttackKey_2 = KeyCode.X;
-    public KeyCode AttackKey_3 = KeyCode.Z;
+    public KeyCode AttackKey_2 = KeyCode.V;
+    public KeyCode AttackKey_3 = KeyCode.B;
 
     private Animator animator;
 

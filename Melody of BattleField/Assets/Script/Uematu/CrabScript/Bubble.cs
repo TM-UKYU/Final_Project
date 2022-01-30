@@ -18,4 +18,9 @@ public class Bubble : MonoBehaviour
         //1ïbå„Ç…çÌèú
         Destroy(gameObject, DeleteTime);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Destroy(gameObject);
+    }
 }
