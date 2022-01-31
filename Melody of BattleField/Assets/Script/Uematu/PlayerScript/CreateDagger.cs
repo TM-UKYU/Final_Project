@@ -21,13 +21,12 @@ public class CreateDagger : MonoBehaviour
     public KeyCode AttackKey_2 = KeyCode.V;
     public KeyCode AttackKey_3 = KeyCode.B;
 
-    private Animator animator;
+    public Animator animator;
 
     private void Start()
     {
         GameObject obj = GameObject.Find("SoundManager");
         soundManager = obj.GetComponent<SoundManager>();
-        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -44,6 +43,8 @@ public class CreateDagger : MonoBehaviour
 
         if (Input.GetKeyUp(AttackKey_1))
         {
+            animator.gameObject.SetActive(true);
+
             Debug.Log("çUåÇ");
             animator.SetTrigger("Attack");
 
@@ -60,6 +61,8 @@ public class CreateDagger : MonoBehaviour
         }
         else if (Input.GetKeyUp(AttackKey_2))
         {
+            animator.gameObject.SetActive(true);
+
             animator.SetTrigger("Attack");
 
             daggerScript2 = (GameObject)Resources.Load("Dagger2");
@@ -70,6 +73,8 @@ public class CreateDagger : MonoBehaviour
         }
         else if (Input.GetKeyUp(AttackKey_3))
         {
+            animator.gameObject.SetActive(true);
+
             animator.SetTrigger("Attack");
 
             daggerScript3 = (GameObject)Resources.Load("Dagger3");

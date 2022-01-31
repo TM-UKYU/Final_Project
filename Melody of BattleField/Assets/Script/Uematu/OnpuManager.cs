@@ -62,15 +62,15 @@ public class OnpuManager : MonoBehaviour
         {
             if (previousButton == PreviousButton.Button2)
             {
-                Onpu3.enabled = true;
+                DestroyOnpu();
+
+                //Onpu3.enabled = true;
                 previousButton = PreviousButton.Button3;
 
                 GameObject obj = GameObject.FindGameObjectWithTag("Player");
 
                 Instantiate(Dagger, obj.gameObject.transform.position + Dagger.transform.position,
                 Quaternion.Euler(0, (this.transform.rotation.y * 100) + 180, 0));
-
-                DestroyOnpu();
             }
             else
             {

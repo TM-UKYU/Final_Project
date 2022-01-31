@@ -345,7 +345,7 @@ GameObject:
   - component: {fileID: 2232648306513759387}
   m_Layer: 0
   m_Name: Guitar
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -375,7 +375,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1431834785722447061}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 0fb80be089349cb44a7d5c9c9171f5c3, type: 3}
   m_Controller: {fileID: 9100000, guid: ba78617d500a5ad48a701a99f59a17a5, type: 2}
   m_CullingMode: 1
@@ -422,6 +422,7 @@ MonoBehaviour:
   AttackKey_1: 99
   AttackKey_2: 120
   AttackKey_3: 122
+  animator: {fileID: 5408748658504690620}
 --- !u!114 &9017231898177785509
 MonoBehaviour:
   m_ObjectHideFlags: 0
