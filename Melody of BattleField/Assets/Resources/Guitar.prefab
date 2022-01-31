@@ -342,6 +342,7 @@ GameObject:
   - component: {fileID: 5692846282565952171}
   - component: {fileID: 6146676023051904311}
   - component: {fileID: 7249129280724841421}
+  - component: {fileID: 2232648306513759387}
   m_Layer: 0
   m_Name: Guitar
   m_TagString: Untagged
@@ -490,6 +491,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2232648306513759387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431834785722447061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81b47a39b851c86478fdbd2049cf0d41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BaseMesh: {fileID: 9219867337802852688}
+  BakeCloneObj: {fileID: 0}
+  CloneCount: 4
+  FlameCountMax: 4
+  isBake: 0
 --- !u!1 &1596252813188240235
 GameObject:
   m_ObjectHideFlags: 0
