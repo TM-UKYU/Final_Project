@@ -561,7 +561,7 @@ PrefabInstance:
     - target: {fileID: 8080282251943135440, guid: 7cb39cbc66461194e924685d49cb3bd1, type: 3}
       propertyPath: MonstarObject
       value: 
-      objectReference: {fileID: 2951909687065979512, guid: 8ceb32a2519b2d247a4bdb69ae37599b, type: 3}
+      objectReference: {fileID: 7400911083052632847, guid: 001f52f4f387e4047a1ff3902bc78762, type: 3}
     - target: {fileID: 8080282251943135443, guid: 7cb39cbc66461194e924685d49cb3bd1, type: 3}
       propertyPath: m_Sprite
       value: 
