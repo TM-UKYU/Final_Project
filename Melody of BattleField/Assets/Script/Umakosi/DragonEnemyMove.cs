@@ -130,9 +130,9 @@ public class DragonEnemyMove : MonoBehaviour
         countDown = 2;
 
         //ç≈èâé~ÇﬂÇÈ
-        GetComponent<CrabScript>().enabled = false;
+        //GetComponent<CrabScript>().enabled = false;
 
-        StartCoroutine("Pouse");
+       // StartCoroutine("Pouse");
     }
 
     private void Update()
