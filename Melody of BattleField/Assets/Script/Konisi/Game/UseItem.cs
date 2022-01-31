@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UseItem : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class UseItem : MonoBehaviour
     public ItemManager itemManager;
     // 装備中のアイテム取得用
     public ChangeEquipItem changeEquipItem;
+    // アイテム数表示
+    public Text itemNum;
 
     private void Start()
     {
@@ -28,6 +31,8 @@ public class UseItem : MonoBehaviour
         player = playerObject.GetComponent<Player>();
         // プレイヤーの中のステータス情報を取得
         status = player.GetComponent<PlayerStatus>();
+
+        itemNum.text = "×" + itemManager.GetItemNum(ItemManager.Item.HEAL);
     }
 
     void Update()
@@ -48,6 +53,8 @@ public class UseItem : MonoBehaviour
                             if(status.Hp >= status.MaxHp) { status.Hp = status.MaxHp; }
                             // アイテム消費
                             itemManager.ConsumptionItem(ItemManager.Item.HEAL);
+                            // アイテム数更新
+                            itemNum.text = "×" + itemManager.GetItemNum(ItemManager.Item.HEAL);
                         }
                     }
                     break;
